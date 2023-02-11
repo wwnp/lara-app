@@ -1,9 +1,11 @@
-<h1>EDIT</h1>
-<form method="post" action="/posts/{{ $id }}">
-    @csrf
-    <input type="text" name="title" value="{{ $post->title }}">
-    <br>
-    <input type="text" name="content"  value="{{ $post->content }}">
-    <br>
-    <button type="submit">Send</button>
-</form>
+<x-layouts.main 
+    title="Create category"
+> 
+<h1>EDIT</h1>\
+<x-form method="put" action="{{ route('posts.update', [ $post->id ] ) }}">
+    @bind($post)
+    @include('posts.form-fields')
+    <button>Update</button>
+    @endbind
+</x-form>
+</x-layouts.main>
