@@ -2,73 +2,88 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\Status;
 use App\Models\Post;
-use App\Models\Category as CategoryModel;
-use App\Models\Comment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class Posts extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        return view("posts.index", [
-            "posts" => Post::with(['category'])->get(),
+        $posts = Post::all();
+        dd($posts);
+        return view('posts.index', [
+            "posts" => []
         ]);
     }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        $cats = CategoryModel::pluck("title", "id");
-        return view("posts.create", compact("cats"));
+        //
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|min:1|max:128',
-            'content' => 'required',
-            'category_id' => 'required',
-        ]);
-
-        $data = $request->only(["title", "content", "category_id"]);
-        Post::create($data);
-        return redirect()->route('posts.index');
+        //
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
-        $post = Post::find($id);
-        // $comment = Comment::find(1);
-        // dd($comment->commentable);
-        // $post = Post::findOrFail($id);
-        // dd($post->comments);
-        // $comments = $post->comments()->where("moderated", Status::approved->value)->orderByDesc("created_at")->get(); // ->comments() from PostModel
-        return view("posts.show", compact('post'));
+        //
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
-        $cats = CategoryModel::pluck("title", "id"); // value - key
-        $post = Post::findOrFail($id);
-        return view("posts.edit", compact('post', 'cats'));
+        //
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'category_id' => 'required',
-        ]);
-        $post = Post::findOrFail($id);
-        $data = $request->only(["title", "content"]);
-        $post->update($data);
-        return redirect()->route('posts.index');
+        //
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
-        $post = Post::findOrFail($id);
-        $post->delete();
-        return redirect()->route('posts.index');
+        //
     }
 }
-// | create, update, delete  | only all | where | redirect | findOrFail, all |
-
-// docs: router, blade directives, artisan, urm 

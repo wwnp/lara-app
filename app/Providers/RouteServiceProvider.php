@@ -27,7 +27,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->configureRateLimiting();
-        $this->configurePatterns();
+
         $this->routes(function () {
             Route::middleware('api')
                 ->prefix('api')
@@ -48,13 +48,5 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
-    }
-
-    protected function configurePatterns()
-    {
-        Route::pattern("id", '^[1-9]+\d*$');
-        Route::pattern("comment", '^[1-9]+\d*$');
-        Route::pattern("slug", '^[a-z]+$');
-        // Route::pattern("slug"); // if without ->whereNumber(["category"]) in web.php
     }
 }

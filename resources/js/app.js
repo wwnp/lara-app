@@ -1,7 +1,7 @@
-import * as bootstrap from 'bootstrap';
+import './bootstrap';
+// import '../sass/app.scss';
 
-console.log("TEasdaasdasdsasdasd1111111111daST")
+console.log(123123);
 
-
-const test = document.querySelector(".testbtn");
-console.log(bootstrap)
+const currentYearId = document.querySelector("#currentYearId")
+currentYearId.innerHTML = (new Date()).getFullYear();

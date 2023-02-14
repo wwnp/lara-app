@@ -1,0 +1,28 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+body {
+    height: 100%;
+}
+.wrapper {
+    display:flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.header {
+    background-color: $dark;
+}
+
+.footer {
+    background-color: $dark;
+    margin-top: auto;
+    color: white;
+}
