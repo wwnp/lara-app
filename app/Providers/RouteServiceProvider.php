@@ -53,6 +53,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function configurePatterns()
     {
         Route::pattern("id", '^[1-9]+\d*$');
+        Route::pattern("comment", '^[1-9]+\d*$');
         Route::pattern("slug", '^[a-z]+$');
         // Route::pattern("slug"); // if without ->whereNumber(["category"]) in web.php
     }

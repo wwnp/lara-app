@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Post extends Model
 {
@@ -18,8 +19,19 @@ class Post extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->morphMany(Comment::class, 'commentable'); //  
     }
+
+    public static function recent()
+    {
+        return self::orderByDesc("id")->get();
+    }
+    // public  function scopeRecent($query)
+    // {
+    //     return $query->orderByDesc("id")->get();
+    //     // $query = DB::table("categories")->select("id", "title");
+    //     // return $query;
+    // }
 }
 // 1 post many comments
 // 1 category many posts

@@ -11,24 +11,24 @@
     <button>Delete</button>
 </form>
 <hr />
-<h3>Comments:</h3>
-<x-form method="post" action="{{ route('comments.store', $post->id)   }}">
-    <x-form-input name="author" label="Author" />
-    <x-form-textarea name="content" label="Content" />
-    <button class="btn btn-success mt-3">Send</button>
+<h3>CommentsAdmin:</h3>
+<x-form method="post" action="{{ route('comments.store', $post->id) }}">
+    <input type="text" name="id" value="{{ $post->id }}" hidden>
+    <x-form-input name="nickname" label="Nickname" />
+    <x-form-textarea name="body" label="Body" />
+    <div class="text-end">
+        <button class="btn btn-success mt-3">Send</button>
+    </div>
 </x-form>
-
-<div class="container">
+<div class="container mt-4">
     <div class="row">
         <div class="col-12">
-            @foreach ($comments as $comment)
-                <p>{{ $comment->author }} said:</p>
-                <p>{{ $comment->content }}</p>
+            @foreach ($post->comments as $comment)
+                <p>{{ $comment->nickname }} said:</p>
+                <p>{{ $comment->body }}</p>
                 <hr>
             @endforeach
-
         </div>
     </div>
 </div>
-
 </x-layouts.main>

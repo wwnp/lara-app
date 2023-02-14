@@ -1,3 +1,7 @@
+{{-- @php
+    dd($category->posts());
+@endphp --}}
+
 <x-layouts.main 
     title="Create category"
 > 

@@ -5,7 +5,7 @@ use App\Http\Controllers\Posts as PostsController;
 use App\Http\Controllers\Categories as CategoriesController;
 use App\Http\Controllers\CategoriesAdmin as CategoriesAdminController;
 use App\Http\Controllers\Goods as GoodsController;
-use App\Http\Controllers\Comments as CommentsController;
+use App\Http\Controllers\CommentsAdmin as CommentsAdminController;
 
 // index create store show edit update destroy
 
@@ -48,5 +48,13 @@ Route::get('/category/{slug}', [CategoriesController::class, 'show'])->name('cat
 Route::resource('goods', GoodsController::class);
 
 // --------------------------
-Route::post('comments/{id}', [CommentsController::class, 'store'])->name('comments.store');
-// Route::resource('comments', CommentsController::cToo few arguments to function App\Http\Controllers\CommentController::store(), 1 passed and exactly 2 expectedlass);
+Route::put('/comments/{id}', [CommentsAdminController::class, 'approve'])->name("comments.approve");
+Route::put('/comments/{id}/restore', [CommentsAdminController::class, 'restore'])->name("comments.restore");
+Route::put('/comments/{id}/decline', [CommentsAdminController::class, 'decline'])->name("comments.decline");
+Route::get('/comments/new', [CommentsAdminController::class, 'new'])->name('comments.new');
+Route::post('comments/{id}', [CommentsAdminController::class, 'store'])->name('comments.store');
+Route::get('/comments', [CommentsAdminController::class, 'index'])->name("comments.index");
+Route::delete('/comments/{id}', [CommentsAdminController::class, 'destroy'])->name("comments.destroy");
+// Route::resource('comments', CommentsAdminController::class);
+
+// Route::get('/comments', [CommentsAdminController::class, 'index'])->name('comments.index');
