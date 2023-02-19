@@ -1,8 +1,7 @@
 @extends('layouts.main', ["title" => "xczxczx"])
 @section('content')
-@php
-    // dd($comment);
-@endphp
+    {{-- <x-form method="put" action="{{ route('comments.test') }}"> --}}
+    {{-- <x-form method="put" action="{{ route('comments.update', [ $comment->id, 'backroute=posts.show' ]) }}"> --}}
     <x-form method="put" action="{{ route('comments.update', [ $comment->id ]) }}">
         @bind($comment)
             <x-form-input name="nickname" label="Nickname" />

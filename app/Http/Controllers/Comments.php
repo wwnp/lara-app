@@ -3,20 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Comment\Status as CommentStatus;
-use App\Enums\Comment\Type as CommentType;
+use App\Enums\Comment\Types as CommentTypes;
 use App\Http\Requests\Comments\Update as UpdateRequest;
 use App\Http\Requests\Comments\Store as StoreRequest;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Video;
 use Illuminate\Http\Request;
-use App\Http\Requests\Posts\Comment as CommentRequest;
 
 class Comments extends Controller
 {
-    const FOR_MODELS = [
-        'post' => Post::class,
-        'video' => Video::class
+    const FOR_ROUTES = [
+        'post' => "posts.show",
+        'video' => "videos.show",
     ];
 
     public function index()
@@ -38,7 +37,7 @@ class Comments extends Controller
         $data = $request->validated();
         $data = $request->safe()->only(['nickname', 'body']);
 
-        $modelName = self::FOR_MODELS[$request->safe()->for];
+        $modelName = CommentTypes::fromName($request->safe()->for)->value;
         $model = $modelName::findOrFail($request->safe()->id);
 
         $model->comments()->create($data);
@@ -58,12 +57,15 @@ class Comments extends Controller
 
     public function update(UpdateRequest $request, $id)
     {
+        // dd($request->backroute);
         $data = $request->validated();
         $comment =  Comment::findOrFail($id);
         $modelName = $comment->commentable_type; // App\Models\Post
         $post = $modelName::findOrFail($comment->commentable_id); // $post = App\Models\Post::findOrFail( 1 )
         Comment::findOrFail($id)->update($data);
-        return redirect()->route('posts.show', [$post->id]);
+        $route = self::FOR_ROUTES[CommentTypes::from($modelName)->name]; // posts.show = FOR_ROUTES['post']
+        return redirect()->route($route, [$post->id]);
+        // return redirect()->route('comments.test', ['param' => 123]);
     }
 
     public function destroy($id)
@@ -99,5 +101,9 @@ class Comments extends Controller
         return view('comments.index', [
             'comments' => $comments,
         ]);
+    }
+    public function test(Request $request)
+    {
+        dd($request);
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Enums\Post\Status as PostStatus;
 use App\Enums\Comment\Status as CommentStatus;
 use App\Http\Requests\Posts\Save as SaveRequest;
 use App\Http\Requests\Posts\Comment as CommentRequest;
