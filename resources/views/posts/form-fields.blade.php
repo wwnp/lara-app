@@ -5,7 +5,7 @@
 {{-- <x-form-select name="tags[]" label="Теги" :options="$tags" multiple many-relation></x-form-select> --}}
 <x-form-input name="birth_year" label="Birth year" type="number" default="1990"/>
 
-
+<x-form-test></x-form-test>
 
 {{-- <select name="tags[]" id="my_select" style="display: none" multiple>
 </select>
