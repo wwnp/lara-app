@@ -1,27 +1,19 @@
 <x-form-input name="title" label="Title" type="text" />
 <x-form-textarea name="content" label="Content" type="text" />
 <x-form-select name="category_id" placeholder="Choose..." :options="$cats" label="Category"></x-form-select>
-<x-form-select name="tags[]" style="display: none" multiple id="my_select"></x-form-select>
-{{-- <x-form-select name="tags[]" label="Теги" :options="$tags" multiple many-relation></x-form-select> --}}
 <x-form-input name="birth_year" label="Birth year" type="number" default="1990"/>
 
-<x-form-test></x-form-test>
+<x-form-select name="tags[]" label="Теги" :options="$tags" multiple many-relation></x-form-select>
 
-{{-- <select name="tags[]" id="my_select" style="display: none" multiple>
-</select>
-@error('tags')
-    <h5>{{ $message }}</h5>
-@enderror --}}
-
-<div class="form-group mt-2">
+{{-- <x-form-select name="tags[]" style="display: none" multiple id="my_select"></x-form-select> --}}
+{{-- <div class="form-group mt-2">
     <div class="btn-group" role="group" aria-label="Selected Button Group" id="js_btnsTag">
         @foreach ($tags as $id => $title)
                 <button type="button" class="btn btn-dark btn-sm" data-id="{{ $id }}">{{ $title }}</button>
         @endforeach
         </div>
-</div>
-
-<script>    
+</div> --}}
+{{-- <script>    
     let sTags = []
     const selectEl = document.getElementById('my_select');
     const btnGroup = document.querySelector('#js_btnsTag')
@@ -46,4 +38,4 @@
             selectEl.appendChild(newOption);
         });
     })
-</script>
+</script> --}}

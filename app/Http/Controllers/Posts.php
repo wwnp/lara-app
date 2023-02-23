@@ -49,8 +49,10 @@ class Posts extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
+        $tags = $post->tags()->pluck("title", "id");
+        // dd($tags);
         $cats = Category::pluck("title", "id");
-        return view('posts.edit', compact('post', 'cats'));
+        return view('posts.edit', compact('post', 'cats', 'tags'));
     }
 
     public function update(SaveRequest $request, $id)
@@ -58,7 +60,11 @@ class Posts extends Controller
 
         $data = $request->validated();
         $post = Post::findOrFail($id);
-        $post->update($data);
+        $postdata = $request->safe()->only(['title', 'content', 'category_id']);
+
+        $post->tags()->sync($data['tags']);
+
+        $post->update($postdata);
         return redirect()->route('posts.show', [$post->id]);
     }
 
