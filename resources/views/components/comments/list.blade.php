@@ -1,9 +1,37 @@
 @props(['comments'])
-@foreach($comments as $comment)
-    <div class="alert alert-success">
-        <em>{{ $comment->created_at }}</em>
-        <h5>{{ $comment->nickname }}</h5>
-        <div class="mt-2">{{ $comment->body }}</div>
-        <a href="{{ route('comments.edit', [ $comment->id ]) }}">Edit</a>
-    </div>
-@endforeach
+<style>
+    .comment {
+        position: relative;
+        padding-left: 20px;
+    }
+    
+    .comment::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 10px;
+        bottom: 0;
+        width: 2px;
+        background-color: #ccc;
+    }
+    
+    .child-comments {
+        margin-left: 20px;
+    }
+</style>
+
+@if (count($comments) > 0)
+    <ul class="root-comments">
+        @foreach ($comments as $comment)
+            <li>
+                @include('components.comments.comment', ['comment' => $comment])
+                
+                @if ($comment->children)
+                    @include('components.comments.child_comments', ['comments' => $comment->children])
+                @endif
+            </li>
+        @endforeach
+    </ul>
+@else
+    <p>No comments yet.</p>
+@endif

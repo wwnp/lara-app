@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Categories;
 use App\Http\Controllers\Comments;
 use App\Http\Controllers\Posts;
+use App\Http\Controllers\Tags;
 use App\Http\Controllers\Videos;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -15,14 +17,16 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+// */
 
-Route::get('/', function () {
-    return view("test");
-});
+// Route::get('/', function () {
+//     return view("test");
+// });
 
 // Route::post('/posts/{id}/comment', [Posts::class, 'comment'])->name('posts.comment');
+Route::post('/update-request', [Posts::class, 'updateRequest'])->name("posts.updateRequest");
 Route::resource('posts', Posts::class)->parameters(["posts" => "id"])->whereNumber(["id"]);
+
 
 Route::put('/comments/{id}/approve', [Comments::class, 'approve'])->name("comments.approve");
 Route::put('/comments/{id}/restore', [Comments::class, 'restore'])->name("comments.restore");
@@ -40,3 +44,14 @@ Route::resource('comments', Comments::class)->parameters(["comments" => "id"]);
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('videos', Videos::class);
+
+Route::resource('categories', Categories::class)->parameters(["categories" => "id"]);
+
+Route::resource('tags', Tags::class)->parameters(["tags" => "id"]);
+
+Route::get('/login', function () {
+    return view("login");
+})->name("login");
+Route::get('/test', function () {
+    return view("test");
+})->name("test");

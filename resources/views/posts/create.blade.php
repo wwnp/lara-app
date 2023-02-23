@@ -1,4 +1,5 @@
-@extends('layouts.main', ["title" => "xczxczx"])
+@extends('layouts.global')
+@extends('layouts.main')
 @section('content')
 <h1>CREATE</h1>
 <x-form method="post" action="{{ route('posts.store') }}">

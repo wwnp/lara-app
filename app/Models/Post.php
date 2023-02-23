@@ -13,7 +13,8 @@ class Post extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $guarded = [];
+    // protected $guarded = []; // Error : Array to string conversion
+    protected $fillable = ['title', 'content', 'category_id', "tags"];
     protected $casts = [
         "status" => Status::class,
         "options" => Base64Json::class,
@@ -28,5 +29,9 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }

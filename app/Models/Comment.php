@@ -13,8 +13,23 @@ class Comment extends Model
 
     protected $fillable = ["nickname", "body", "status"];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function commentable()
     {
         return $this->morphTo();
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Comment::class, 'parent_id')->limit(5);
+    }
+
+    public function scopeRootComments($query)
+    {
+        return $query->where('parent_id', null);
     }
 }

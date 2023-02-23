@@ -1,9 +1,3 @@
-{{-- 
-@php
-    foreach($comments as $comment) {
-        dd($comment->commentable->id);
-    }
-@endphp --}}
 
 <table class="table table-striped">
     <thead>

@@ -1,26 +1,16 @@
-make comments:
-table+ (morphs softDeletes)
-relations+
-model+
-method comment in Post Contorller +
-controller Comments +
-method new +
-reforge x-button to universal component+
+comments - nested with loading or comment like anonboard
+poly m-m
+make order: which are user and admin controllers
+edit tags.* rule ++++++
+make custom rule +++
+attempt simple pagination on posts +++
 
-1 x-nav left+++++++++++++++++++
-2 make video page: +
-    conrotller +
-    mdoel +
-    table +
-    relations +
-    load video from youtube +
+back
+table posts
+posts crete edit
 
-3 add-comment component   +++++
-4 foreach-comments component +++++++++++++++
-
-5 redirect in edit comment  (edit comment by user ? (auth)  )  ++++++++++++++++++++
-(transfer data by session laravel || get url || )
-
-6 caterories for post 1-many ++++
-form request validation store and unique 
-
+front:
+posts
+post
+posts by tags
+comments

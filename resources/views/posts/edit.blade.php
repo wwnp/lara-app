@@ -1,4 +1,5 @@
-@extends('layouts.main', ["title" => "xczxczx"])
+@extends('layouts.global')
+@extends('layouts.main')
 @section('content')
 <h1>EDIT</h1>
 <x-form method="put" action="{{ route('posts.update', [ $post->id ] ) }}">

@@ -1,7 +1,5 @@
-{{-- @php
-    dd($comments);
-@endphp --}}
-@extends('layouts.main', ["title" => "xczxczx"])
+@extends('layouts.global')
+@extends('layouts.main')
 @section('content')
 @bind($comments)
 @include('comments.table')

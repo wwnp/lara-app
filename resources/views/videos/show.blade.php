@@ -1,4 +1,5 @@
-@extends('layouts.main', ["title" => "xczxczx"])
+@extends('layouts.global')
+@extends('layouts.main')
 @section('content')
     <a href="{{ route('videos.index') }}">Back</a>
     <hr>

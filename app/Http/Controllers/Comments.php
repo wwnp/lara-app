@@ -7,8 +7,6 @@ use App\Enums\Comment\Types as CommentTypes;
 use App\Http\Requests\Comments\Update as UpdateRequest;
 use App\Http\Requests\Comments\Store as StoreRequest;
 use App\Models\Comment;
-use App\Models\Post;
-use App\Models\Video;
 use Illuminate\Http\Request;
 
 class Comments extends Controller
@@ -24,7 +22,6 @@ class Comments extends Controller
         return view('comments.index', [
             'comments' => $comments,
         ]);
-        // $comments = Comment::withTrashed()->with(['post.category'])->get();
     }
 
     public function create()
@@ -35,12 +32,22 @@ class Comments extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
-        $data = $request->safe()->only(['nickname', 'body']);
 
         $modelName = CommentTypes::fromName($request->safe()->for)->value;
-        $model = $modelName::findOrFail($request->safe()->id);
 
+        $essence = $modelName::findOrFail($data['id']);
+
+        if ($essence->comments()->count() >= 5) {
+            return redirect()
+                ->back()
+                ->withErrors(['comments_limit' => 'Reached the maximum number of comments for this post.']);
+        }
+
+        $data = $request->safe()->only(['nickname', 'body']);
+
+        $model = $modelName::findOrFail($request->safe()->id);
         $model->comments()->create($data);
+        session()->flash('notification', 'comments.create');
         return redirect()->back();
     }
 
@@ -57,15 +64,14 @@ class Comments extends Controller
 
     public function update(UpdateRequest $request, $id)
     {
-        // dd($request->backroute);
         $data = $request->validated();
         $comment =  Comment::findOrFail($id);
         $modelName = $comment->commentable_type; // App\Models\Post
         $post = $modelName::findOrFail($comment->commentable_id); // $post = App\Models\Post::findOrFail( 1 )
         Comment::findOrFail($id)->update($data);
+        session()->flash('notification', 'comments.updated');
         $route = self::FOR_ROUTES[CommentTypes::from($modelName)->name]; // posts.show = FOR_ROUTES['post']
         return redirect()->route($route, [$post->id]);
-        // return redirect()->route('comments.test', ['param' => 123]);
     }
 
     public function destroy($id)
@@ -104,6 +110,6 @@ class Comments extends Controller
     }
     public function test(Request $request)
     {
-        dd($request);
+        dd($request->param);
     }
 }
