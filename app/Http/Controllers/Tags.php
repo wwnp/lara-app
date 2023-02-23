@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Tags\Save as SaveRequest;
+use App\Http\Requests\Tags\Store as StoreRequest;
+use App\Http\Requests\Tags\Update as UpdateRequest;
 use App\Models\Tag;
 
 class Tags extends Controller
 {
     public function index()
     {
-        $tag = Tag::findOrFail(1)->posts()->get()->count();
-        dd($tag);
+        // $tag = Tag::findOrFail(1)->posts()->get()->count();
+        // dd($tag);
         return view('tags.index', ['tags' => Tag::all()]);
     }
 
@@ -19,7 +20,7 @@ class Tags extends Controller
         return view('tags.create');
     }
 
-    public function store(SaveRequest $request)
+    public function store(StoreRequest $request)
     {
         $data = $request->validated();
         $tag = Tag::create($data);
@@ -38,7 +39,7 @@ class Tags extends Controller
         return view('tags.edit', compact('tag'));
     }
 
-    public function update(SaveRequest $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         $data = $request->validated();
         $tag = Tag::findOrFail($id);

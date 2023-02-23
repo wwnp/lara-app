@@ -10,8 +10,8 @@ class Update extends Store
     public function rules()
     {
         return [
-            'slug' => 'required',
-            // 'slug' => ['required', Rule::unique("categories")->ignore(request()->id)],
+            // 'slug' => 'required',
+            'slug' => ['required', Rule::unique("categories")->ignore(request()->id)],
             'title' => ['required'],
             'desc' => 'required',
         ];
