@@ -57,3 +57,15 @@ Route::controller(Session::class)->group(function () {
         Route::delete('/auth/logout', 'destroy')->name("login.destroy");
     });
 });
+
+// /asdasd
+// /asdasd
+// /asdasd
+// /asdasd
+// /asdasd
+// /asdasd
+// /asdasd
+// /asdasd
+// /asdasd
+// /asdasd
+// /asdasd
