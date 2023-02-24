@@ -6,11 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ config('app.name', 'Laravel') }}</title>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    
 </head>
 <body class="app-grid">
     <header>
         <nav class="navbar navbar-dark bg-dark">
-            123
+            <div>
+                @auth
+                    <a href="{{ route('login.exit')}}" class="btn btn-danger">Logout</a>
+                @else
+                    <a href="{{ route('login')}}" class="btn btn-success">Login</a>
+                @endif
+                <a href="{{ route('posts.index')}}" class="btn btn-info">Posts</a>
+            </div>
         </nav>
     </header>
     <main>
@@ -111,6 +119,10 @@
             <a class="text-light" href="https://mdbootstrap.com/">MDBootstrap.com</a>
         </div>
     </footer>
+    <div id="loading">
+        <div class="spinner"></div>
+    </div>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 
 </html>

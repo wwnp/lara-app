@@ -25,7 +25,7 @@ class Comment extends Model
 
     public function children()
     {
-        return $this->hasMany(Comment::class, 'parent_id')->limit(5);
+        return $this->hasMany(Comment::class, 'parent_id')->limit(4);
     }
 
     public function scopeRootComments($query)

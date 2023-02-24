@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\Session;
 use App\Http\Controllers\Categories;
 use App\Http\Controllers\Comments;
 use App\Http\Controllers\Posts;
@@ -19,39 +20,40 @@ use Illuminate\Support\Facades\Route;
 |
 // */
 
-// Route::get('/', function () {
-//     return view("test");
-// });
+Route::get('/', function () {
+    return 123;
+});
 
 // Route::post('/posts/{id}/comment', [Posts::class, 'comment'])->name('posts.comment');
-Route::post('/update-request', [Posts::class, 'updateRequest'])->name("posts.updateRequest");
-Route::resource('posts', Posts::class)->parameters(["posts" => "id"])->whereNumber(["id"]);
 
+Route::middleware('auth')->group(function () {
+    Route::post('/update-request', [Posts::class, 'updateRequest'])->name("posts.updateRequest");
+    Route::resource('posts', Posts::class)->parameters(["posts" => "id"])->whereNumber(["id"]);
 
-Route::put('/comments/{id}/approve', [Comments::class, 'approve'])->name("comments.approve");
-Route::put('/comments/{id}/restore', [Comments::class, 'restore'])->name("comments.restore");
-Route::put('/comments/{id}/decline', [Comments::class, 'decline'])->name("comments.decline");
-Route::get('/comments/new', [Comments::class, 'new'])->name("comments.new");
-Route::post('/comments/new', [Comments::class, 'new'])->name("comments.new");
+    Route::put('/comments/{id}/approve', [Comments::class, 'approve'])->name("comments.approve");
+    Route::put('/comments/{id}/restore', [Comments::class, 'restore'])->name("comments.restore");
+    Route::put('/comments/{id}/decline', [Comments::class, 'decline'])->name("comments.decline");
+    Route::get('/comments/new', [Comments::class, 'new'])->name("comments.new");
+    Route::post('/comments/new', [Comments::class, 'new'])->name("comments.new");
 
-Route::get('/comments/test', [Comments::class, 'test'])->name("comments.test");
-// Route::get('/comments/{id}/edit', [Comments::class, 'edit'])->name("comments.edit");
-// Route::get('/comments', [Comments::class, 'index'])->name("comments.index");
+    Route::resource('videos', Videos::class);
+    Route::resource('categories', Categories::class)->parameters(["categories" => "id"]);
+
+    Route::resource('tags', Tags::class)->parameters(["tags" => "id"]);
+});
+
 Route::resource('comments', Comments::class)->parameters(["comments" => "id"]);
 
-// Auth::routes();
+Route::post('/comments/new', [Comments::class, 'new'])->name("comments.new");
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::controller(Session::class)->group(function () {
 
-Route::resource('videos', Videos::class);
-
-Route::resource('categories', Categories::class)->parameters(["categories" => "id"]);
-
-Route::resource('tags', Tags::class)->parameters(["tags" => "id"]);
-
-Route::get('/login', function () {
-    return view("login");
-})->name("login");
-Route::get('/test', function () {
-    return view("test");
-})->name("test");
+    Route::middleware('guest')->group(function () {
+        Route::get('/auth/login', 'create')->name("login");
+        Route::post('/auth/login', 'store')->name("login.store");
+    });
+    Route::middleware('auth')->group(function () {
+        Route::get('/auth/logout', 'exit')->name("login.exit");
+        Route::delete('/auth/logout', 'destroy')->name("login.destroy");
+    });
+});

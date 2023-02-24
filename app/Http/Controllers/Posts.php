@@ -75,14 +75,12 @@ class Posts extends Controller
         return redirect()->route('posts.index');
     }
 
-
-
-    public function updateRequest(Request $request)
-    {
-        $data = $request->all();
-        dd($data);
-        // Add or update data in $request here
-        $request->merge(['new_data' => 'some value']);
-        return response()->json(['message' => 'Request updated successfully!']);
-    }
+    // public function updateRequest(Request $request)
+    // {
+    //     $data = $request->all();
+    //     dd($data);
+    //     // Add or update data in $request here
+    //     $request->merge(['new_data' => 'some value']);
+    //     return response()->json(['message' => 'Request updated successfully!']);
+    // }
 }

@@ -10,16 +10,16 @@
     <x-form-input name="nickname" label="Nickname" />
     <x-form-textarea name="body" label="Body" />
 
-    <div class="input-group mt-3">
+    <x-recaptcha 
+        name="g-recaptcha-response"
+    >
+    </x-recaptcha>
+    {{-- <div class="input-group mt-3">
         <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
-        @error('g-recaptcha-response')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
     </div>
-
+    @error('g-recaptcha-response') <div class="invalid-feedback">{{ $message }}</div> @enderror --}}
     <div class="text-center">
         <button class="btn btn-lg btn-primary mt-1" id="submit-btn">Send</button>
     </div>
 </x-form>
 
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>

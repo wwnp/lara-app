@@ -32,6 +32,7 @@ class Store extends FormRequest
     {
         return [
             'comments_limit.required' => 'Reached the maximum number of comments for this post.',
+            'g-recaptcha-response' => 'Pass recaptcha test please',
         ];
     }
 }

@@ -151,7 +151,6 @@ var pJS = function (tag_id, params) {
         mode_bubble_size: pJS.interactivity.modes.bubble.size,
         mode_repulse_distance: pJS.interactivity.modes.repulse.distance
     };
-    console.log(pJS)
 
     pJS.fn.retinaInit = function () {
 
@@ -1475,7 +1474,6 @@ window.pJSDom = [];
 
 window.particlesJS = function (tag_id, params) {
 
-    //console.log(params);
 
     /* no string id? so it's object params, and set the id with default id */
     if (typeof (tag_id) != 'string') {

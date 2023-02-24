@@ -9,20 +9,20 @@
                     Login
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('store') }}">
+                    <form method="POST" action="{{ route('login.store') }}">
                         @csrf
-                        {{-- <div class="mb-3">
-                            <x-form-input name="email" label="Email"></x-form-input>
+                        <div class="mb-3">
+                            <x-form-input name="email" type="email" label="Email"></x-form-input>
                         </div>
-                        <div class="mb-4">
+                        <div class="mb-3">
                             <x-form-input name="password" label="Password" type="password"></x-form-input>
-                        </div> --}}
-                        <div class="mb-4">
-                            1
-                            <x-recaptcha></x-recaptcha>
                         </div>
-
-
+                        <div class="mb-3">
+                            <x-form-checkbox name="remember" label="Remember" checked />
+                        </div>
+                        {{-- <div class="mb-3">
+                            <x-recaptcha name="g-recaptcha-response" > </x-recaptcha>
+                        </div> --}}
                         <div class="row">
                             <button type="submit" class="btn btn-primary">Login</button>
                         </div>
