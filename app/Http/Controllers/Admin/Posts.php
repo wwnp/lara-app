@@ -1,24 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Post;
-use App\Enums\Comment\Status as CommentStatus;
 use App\Http\Requests\Posts\Save as SaveRequest;
 use App\Models\Category;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class Posts extends Controller
 {
-    public function index()
-    {
-        return view('posts.index', [
-            "posts" =>  Post::with("category")->withCount("comments")->orderBy("id", "DESC")->paginate(5)->onEachSide(2),
-            "tags" => Tag::pluck("title", "id")
-        ]);
-    }
-
     public function create()
     {
         $cats = Category::pluck("title", "id");
@@ -36,14 +28,6 @@ class Posts extends Controller
         $post = Post::create($postdata);
         $post->tags()->sync($data['tags']);
         return redirect()->route('posts.show', [$post->id]);
-    }
-
-    public function show($id)
-    {
-        $post = Post::findOrFail($id);
-        $tags = $post->tags()->get();
-        $comments = $post->comments()->rootComments()->where("status", CommentStatus::APPROVED)->get();
-        return view('posts.show', compact('post', "comments", "tags"));
     }
 
     public function edit($id)

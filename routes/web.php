@@ -2,10 +2,19 @@
 
 use App\Http\Controllers\Auth\Session;
 use App\Http\Controllers\Categories;
-use App\Http\Controllers\Comments;
-use App\Http\Controllers\Posts;
-use App\Http\Controllers\Tags;
-use App\Http\Controllers\Videos;
+
+use App\Http\Controllers\All\Comments as AllComments;
+use App\Http\Controllers\All\Posts as AllPosts;
+
+
+
+use App\Http\Controllers\Tags as AdminTags;
+use App\Http\Controllers\Videos as AdminVideos;
+use App\Http\Controllers\Admin\Comments as AdminComments;
+use App\Http\Controllers\Admin\Categories as AdminCategories;
+use App\Http\Controllers\Admin\Posts as AdminPosts;
+
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,31 +29,73 @@ use Illuminate\Support\Facades\Route;
 |
 // */
 
-Route::get('/', function () {
-    return 123;
+// Route::get('/', function () {
+//     return 123;
+// });
+
+
+Route::middleware('auth', 'auth.admin')->prefix("admin")->group(function () {
+
+    Route::controller(AdminComments::class)->group(function () {
+        Route::get('/comments', 'index')->name("comments.index");
+        Route::put('/comments/{id}/approve', 'approve')->name("comments.approve");
+        Route::put('/comments/{id}/restore', 'restore')->name("comments.restore");
+        Route::put('/comments/{id}/decline', 'decline')->name("comments.decline");
+        Route::get('/comments/new', 'new')->name("comments.new");
+        Route::post('/comments/new', 'new')->name("comments.new");
+        Route::delete('/comments/{id}', 'destroy')->name("comments.destroy");
+    });
+
+    Route::resource('categories', AdminCategories::class)->parameters(["categories" => "id"]);
+    Route::resource('tags', AdminTags::class)->parameters(["tags" => "id"]);
+    Route::resource('videos', AdminVideos::class)->parameters(["videos" => "id"]);
+
+    Route::resource('posts', AdminPosts::class)->parameters(["posts" => "id"]);
+
+    // Route::controller(AdminPosts::class)->group(function () {
+    //     Route::get('/posts', 'index')->name("posts.index");
+    //     Route::get('/posts/{id}', 'show')->name("posts.show");
+    // });
+
+    // Route::controller(AdminCategories::class)->group(function () {
+    //     Route::get('/comments', 'index')->name("comments.index");
+    //     Route::put('/comments/{id}/approve', 'approve')->name("comments.approve");
+    //     Route::put('/comments/{id}/restore', 'restore')->name("comments.restore");
+    //     Route::put('/comments/{id}/decline', 'decline')->name("comments.decline");
+    //     Route::get('/comments/new', 'new')->name("comments.new");
+    //     Route::post('/comments/new', 'new')->name("comments.new");
+    //     Route::delete('/comments/{id}', 'destroy')->name("comments.destroy");
+    // });
 });
 
-Route::post('/posts/{id}/comment', [Posts::class, 'comment'])->name('posts.comment');
 
-Route::middleware('auth')->group(function () {
-    Route::post('/update-request', [Posts::class, 'updateRequest'])->name("posts.updateRequest");
-    Route::resource('posts', Posts::class)->parameters(["posts" => "id"])->whereNumber(["id"]);
-
-    Route::put('/comments/{id}/approve', [Comments::class, 'approve'])->name("comments.approve");
-    Route::put('/comments/{id}/restore', [Comments::class, 'restore'])->name("comments.restore");
-    Route::put('/comments/{id}/decline', [Comments::class, 'decline'])->name("comments.decline");
-    Route::get('/comments/new', [Comments::class, 'new'])->name("comments.new");
-    Route::post('/comments/new', [Comments::class, 'new'])->name("comments.new");
-
-    Route::resource('videos', Videos::class);
-    Route::resource('categories', Categories::class)->parameters(["categories" => "id"]);
-
-    Route::resource('tags', Tags::class)->parameters(["tags" => "id"]);
+Route::controller(AllPosts::class)->group(function () {
+    Route::get('/posts', 'index')->name("posts.index");
+    Route::get('/posts/{id}', 'show')->name("posts.show");
 });
+Route::post('/comments', [AllComments::class, 'store'])->name("comments.store");
 
-Route::resource('comments', Comments::class)->parameters(["comments" => "id"]);
 
-Route::post('/comments/new', [Comments::class, 'new'])->name("comments.new");
+// Route::resource('posts', Posts::class)->parameters(["posts" => "id"]);
+// Route::middleware('auth')->group(function () {
+//     Route::post('/update-request', [Posts::class, 'updateRequest'])->name("posts.updateRequest");
+//     Route::resource('posts', Posts::class)->parameters(["posts" => "id"])->whereNumber(["id"]);
+
+//     Route::put('/comments/{id}/approve', [Comments::class, 'approve'])->name("comments.approve");
+//     Route::put('/comments/{id}/restore', [Comments::class, 'restore'])->name("comments.restore");
+//     Route::put('/comments/{id}/decline', [Comments::class, 'decline'])->name("comments.decline");
+//     Route::get('/comments/new', [Comments::class, 'new'])->name("comments.new");
+//     Route::post('/comments/new', [Comments::class, 'new'])->name("comments.new");
+
+//     Route::resource('videos', Videos::class);
+//     Route::resource('categories', Categories::class)->parameters(["categories" => "id"]);
+
+// });
+
+// Route::resource('comments', Comments::class)->parameters(["comments" => "id"]);
+
+
+// Route::post('/comments/new', [Comments::class, 'new'])->name("comments.new");
 
 
 
@@ -67,9 +118,9 @@ Route::controller(Session::class)->group(function () {
 //         Route::get('/posts/{id}', 'show')->name("posts.show");
 //     });
 //     Route::middleware('auth')->group(function () {
-//         Route::get('/posts/create', 'create')->name("posts.create");
-//         Route::post('/posts', 'store')->name("posts.store");
-//         Route::put('/posts/{id}/edit', 'update')->name("posts.update");
-//         Route::delete('/posts/{id}', 'delete')->name("posts.delete");
+        // Route::get('/posts/create', 'create')->name("posts.create");
+        // Route::post('/posts', 'store')->name("posts.store");
+        // Route::put('/posts/{id}/edit', 'update')->name("posts.update");
+        // Route::delete('/posts/{id}', 'delete')->name("posts.delete");
 //     });
 // });

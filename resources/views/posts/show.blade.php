@@ -7,7 +7,8 @@
       <p class="text-muted text-center">Written by John Doe on June 1, 2022</p>
     </header>
     <section>
-        <p>{{ $post->content }}</p>
+        <p>{!! $post->content !!}</p>
+        {{-- <p>{{ $post->content }}</p> --}}
     </section>
     <footer class="mt-4">
         @foreach ($tags as $tag)

@@ -1,5 +1,5 @@
 <x-form-input name="title" label="Title" type="text" />
-<x-form-textarea name="content" label="Content" type="text" />
+<x-form-textarea name="content" label="Content" type="text" v-html="formData.content" rows="10"/>
 <x-form-select name="category_id" placeholder="Choose..." :options="$cats" label="Category"></x-form-select>
 <x-form-input name="birth_year" label="Birth year" type="number" default="1990"/>
 

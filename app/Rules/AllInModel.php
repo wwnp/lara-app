@@ -14,13 +14,18 @@ class AllInModel implements Rule
 
     public function passes($attribute, $value)
     {
+        $count = $this->model::whereIn("id", $value)->count();
+
         foreach ($value as $id) {
-            if (!preg_match('/^[1-9]\d+$/', $id)) {
+
+            if (!preg_match('/^[1-9]+\d*$/', $id)) {
+                dd($id);
                 // if (!preg_match('/^[1-9]+\d*$/', $id)) {
                 return false;
             }
         }
-        $count = $this->model::whereIn("id", $value)->count();
+
+
         return $count === count($value);
     }
 

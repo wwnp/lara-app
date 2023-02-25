@@ -1,18 +1,9 @@
-comments - nested with loading or comment like anonboard
-poly m-m
-make order: which are user and admin controllers
-edit tags.* rule ++++++
-make custom rule +++
-attempt simple pagination on posts +++
-
-back
-table posts
-posts crete edit
-
-front:
-posts
-post
-posts by tags
-comments
-
-
+pagination to: posts, comments, new comments
+when add comment to post, auto title to admin and highlight it
+when add comment to post, auto title to author and highlight it if post belongs to author
+posts.show  add written author and created date and updated date if exists
+limit comment number to 5 from 1 user; and 30 in all
+* auto scroll loading comments
+make admin posts.index in table structure
+translation to rus , everything
+html tags in content textarea +-

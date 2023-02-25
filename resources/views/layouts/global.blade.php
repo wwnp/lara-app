@@ -13,7 +13,7 @@
         <nav class="navbar navbar-dark bg-dark">
             <div>
                 @auth
-                    <a href="{{ route('login.exit')}}" class="btn btn-danger">Logout</a>
+                    <a href="{{ route('login.exit')}}" class="btn btn-warning">Profile</a>
                 @else
                     <a href="{{ route('login')}}" class="btn btn-success">Login</a>
                 @endif

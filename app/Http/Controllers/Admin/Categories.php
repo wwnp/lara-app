@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Categories\Store as StoreRequest;
 use App\Http\Requests\Categories\Update as UpdateRequest;
 use App\Models\Category;
