@@ -24,7 +24,7 @@ Route::get('/', function () {
     return 123;
 });
 
-// Route::post('/posts/{id}/comment', [Posts::class, 'comment'])->name('posts.comment');
+Route::post('/posts/{id}/comment', [Posts::class, 'comment'])->name('posts.comment');
 
 Route::middleware('auth')->group(function () {
     Route::post('/update-request', [Posts::class, 'updateRequest'])->name("posts.updateRequest");
@@ -46,8 +46,11 @@ Route::resource('comments', Comments::class)->parameters(["comments" => "id"]);
 
 Route::post('/comments/new', [Comments::class, 'new'])->name("comments.new");
 
-Route::controller(Session::class)->group(function () {
 
+
+
+
+Route::controller(Session::class)->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('/auth/login', 'create')->name("login");
         Route::post('/auth/login', 'store')->name("login.store");
@@ -57,3 +60,16 @@ Route::controller(Session::class)->group(function () {
         Route::delete('/auth/logout', 'destroy')->name("login.destroy");
     });
 });
+
+// Route::controller(Posts::class)->group(function () {
+//     Route::middleware('guest')->group(function () {
+//         Route::get('/posts', 'index')->name("posts.index");
+//         Route::get('/posts/{id}', 'show')->name("posts.show");
+//     });
+//     Route::middleware('auth')->group(function () {
+//         Route::get('/posts/create', 'create')->name("posts.create");
+//         Route::post('/posts', 'store')->name("posts.store");
+//         Route::put('/posts/{id}/edit', 'update')->name("posts.update");
+//         Route::delete('/posts/{id}', 'delete')->name("posts.delete");
+//     });
+// });

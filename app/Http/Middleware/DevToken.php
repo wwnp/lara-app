@@ -9,8 +9,10 @@ class DevToken
 {
     public function handle(Request $request, Closure $next)
     {
-        $request->cookie("devtoken", "qweqwe", 60);
-        dd($request->cookie("devtoken"));
+        // dd($request->cookie("devtoken"));
+        // if ($request->cookie('devtoken') !== '123') {
+        //     abort(500);
+        // }
         // ...
         return $next($request);
     }
