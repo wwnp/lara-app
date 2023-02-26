@@ -8,3 +8,9 @@ make admin posts.index in table structure
 translation to rus , everything
 html tags in content textarea +-
 sort in posts.index by newest to oldest
+
+singup - email , login after
+change password in profile
+verification email
+rate limiter login
+additional password for super private actions( delete account for example )

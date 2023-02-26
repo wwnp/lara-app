@@ -12,12 +12,13 @@
     <header>
         <nav class="navbar navbar-dark bg-light ">
             <div>
-                @auth
-                    <a href="{{ route('login.exit')}}" class="btn btn-warning">Profile</a>
+                <x-nav-header></x-nav-header>
+                {{-- @auth
+                    <a href="{{ route('auth.profile')}}" class="btn btn-warning">Profile</a>
                 @else
-                    <a href="{{ route('login')}}" class="btn btn-success">Login</a>
-                @endif
-                <a href="{{ route('posts.index')}}" class="btn btn-info">Posts</a>
+                    <a href="{{ route('login.create')}}" class="btn btn-success">Login</a>
+                @endif --}}
+                {{-- <a href="{{ route('posts.index')}}" class="btn btn-info">Posts</a> --}}
             </div>
         </nav>
     </header>

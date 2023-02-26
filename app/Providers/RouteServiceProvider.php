@@ -35,5 +35,6 @@ class RouteServiceProvider extends ServiceProvider
     protected function configurePattern()
     {
         Route::pattern("id", '^[1-9]+\d*$');
+        Route::pattern("slug", '^[a-z]{3,15}$');
     }
 }

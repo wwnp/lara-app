@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Enums\Comment\Status as CommentStatus;
+use App\Models\Category;
 
 class Posts extends Controller
 {
@@ -23,5 +24,12 @@ class Posts extends Controller
         $tags = $post->tags()->get();
         $comments = $post->comments()->rootComments()->where("status", CommentStatus::APPROVED)->get();
         return view('posts.show', compact('post', "comments", "tags"));
+    }
+    public function slug($slug)
+    {
+        $category = Category::where("slug", $slug)->first();
+        $posts = $category->posts()->paginate(5)->onEachSide(2);
+        // dd($posts);
+        return view('posts.slug', compact("posts"));
     }
 }

@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="card-text">
-                        <x-form method="delete" action="{{ route('login.destroy') }}">
+                        <x-form method="delete" action="{{ route('profile.destroy') }}">
                             <button class="btn btn-danger">Выйти</button>
                         </x-form>
                     </div>

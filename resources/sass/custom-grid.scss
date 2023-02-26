@@ -2,12 +2,6 @@
 .custom-container {
     padding: 40px;
 }
-// .header-section {
-    
-//     background-color: $dark;
-// }
-
-
 
 // MOBILE
 .grid-container {
@@ -18,10 +12,6 @@
 .article-section-half:nth-child(3) {
     display: none;
 }
-
-
-
-
 
 // MEDIUM 768
 @media only screen and (min-width: $lg) {
@@ -47,10 +37,6 @@
     .footer-section {
         grid-area: footer;
     }
-  
-}
-@media only screen and (min-width: $md) {
-  
 }
 
 

@@ -1,17 +1,13 @@
 @section('main')
-    <div class="container-fluid">
-        <div class="row">
+    <div class="container-fluid h-100percent">
+        <div class="row h-100percent">
             <div class="col col-12 col-lg-2 bg-dark-custom p-1 custom-border-bottom">
+                <h6 class="display-6 text-white">Interesting:</h6>
+                <hr>
                 <ul class="nav flex-column nav-pills">
-
-                    @auth
-                        <x-navigation.link routeName="comments.index">Comments</x-navigation.link>
-                        <x-navigation.link routeName="posts.index">Posts</x-navigation.link>
-                        <x-navigation.link routeName="comments.new">New comments</x-navigation.link>
-                    @else
-                        <a href="{{ route('login')}}" class="btn btn-success">Login</a>
-                    @endif
-
+                    {{-- <x-navigation.link routeName="posts.slug">What is about ChatGPT</x-navigation.link> --}}
+                    <x-navigation.link routeName="posts.slug" id="php">About PHP</x-navigation.link>
+                    <x-navigation.link routeName="posts.slug" id="javascript">About JS</x-navigation.link>
                 </ul>
             </div>
             <div class="col col-12 col-lg-10 p-0">

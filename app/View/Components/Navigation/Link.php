@@ -8,13 +8,22 @@ use Illuminate\View\Component;
 class Link extends Component
 {
     public bool $isActive;
-    public string $routeName;
+    public string $completedRoute;
+    // public ?int $id;
 
     public function __construct(
         string $routeName,
+        string $id = null,
     ) {
-        $this->routeName = route($routeName);
-        $this->isActive = Route::current()->getName() === $routeName;
+        $this->completedRoute = route($routeName, $id);
+
+        $givenRoute = Route::current()->getName() . "/" . Route::current()->parameter("slug");
+        $addressRoute = $routeName . "/" . $id;
+        // dd($givenRoute, $addressRoute);
+        // dd(Route::current());
+        // dd(Route::current()->getName());
+        // dd(Route::current()->parameter("slug"));
+        $this->isActive =  $givenRoute === $addressRoute;
     }
 
     public function render()

@@ -1,6 +1,6 @@
 <li class="nav-item">
     <a 
-    href="{{ $routeName }}"
+    href="{{ $completedRoute }}"
     class="nav-link  @if ($isActive) active @endif"
     >
     {{ $slot }}</a>
