@@ -19,10 +19,10 @@ class Session extends Controller
         $request->session()->regenerate();
         return redirect()->intended('posts');
     }
-    public function profile()
-    {
-        return view('auth.profile');
-    }
+    // public function profile()
+    // {
+    //     return view('auth.profile');
+    // }
     public function destroy(Request $request)
     {
         Auth::guard('web')->logout();

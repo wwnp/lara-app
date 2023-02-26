@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\Session;
+use App\Http\Controllers\Auth\Profile;
 
 use App\Http\Controllers\All\Comments as AllComments;
 use App\Http\Controllers\All\Posts as AllPosts;
@@ -12,7 +13,6 @@ use App\Http\Controllers\Videos as AdminVideos;
 use App\Http\Controllers\Admin\Comments as AdminComments;
 use App\Http\Controllers\Admin\Categories as AdminCategories;
 use App\Http\Controllers\Admin\Posts as AdminPosts;
-
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -108,10 +108,10 @@ Route::controller(Session::class)->group(function () {
         Route::get('/auth/login', 'create')->name("login.create");
         Route::post('/auth/login', 'store')->name("login.store");
     });
-    Route::middleware('auth')->group(function () {
-        Route::get('/auth/profile', 'profile')->name("auth.profile");
-        Route::delete('/auth/profile', 'destroy')->name("profile.destroy");
-    });
+});
+Route::middleware('auth')->group(function () {
+    Route::get('/auth/profile', [Profile::class, 'index'])->name("profile.index");
+    Route::delete('/auth/profile', [Profile::class, 'destroy'])->name("profile.destroy");
 });
 
 

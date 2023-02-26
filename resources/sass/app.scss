@@ -70,3 +70,26 @@ main {
     height: 100%;
 }
   
+
+.avatar {
+    width: 75px;
+    height: 75px;
+    overflow: hidden;
+  }
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+// .pre-scrollable {
+    // white-space: pre-wrap;
+    // overflow-x:scroll
+// }
+
+.code-wrapper {
+    overflow: scroll;
+    display: grid;
+}

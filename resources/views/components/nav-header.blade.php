@@ -1,5 +1,6 @@
 @auth
-<a href="{{ route('auth.profile')}}" class="btn btn-warning">Profile</a>
+<a href="{{ route('profile.index')}}" class="btn btn-warning">Личный кабинет</a>
 @else
-<a href="{{ route('login.create')}}" class="btn btn-success">Login</a>
+<a href="{{ route('login.create')}}" class="btn btn-success">Войти</a>
 @endif
+<a href="{{ route('posts.index')}}" class="btn btn-dark">Главная</a>
