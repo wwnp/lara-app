@@ -22,9 +22,9 @@
             </div>
         </nav>
     </header>
-    <main>
-        @yield('main')
-    </main>
+
+    @yield('main')
+
     <footer class="footer text-center text-lg-start bg-dark-custom text-white">
         <div class="container p-4">
             <!--Grid row-->

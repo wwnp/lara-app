@@ -3,7 +3,7 @@
 @section('content')
 <div class="container ">
     <div class="row justify-content-center">
-        <div class="col-md-4" style="z-index:1; position:relative">
+        <div class="col-10 col-lg-4" style="z-index:1; position:relative">
             <div class="card mt-5 p-2" >
                 <div class="card-header text-center">
                     Login

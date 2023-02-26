@@ -93,3 +93,11 @@ main {
     overflow: scroll;
     display: grid;
 }
+
+.pagination .page-item.active .page-link {
+    background-color: #ffca2c !important;
+    // color: #000;
+}
+.pagination .page-item .page-link {
+    color: #000;
+}

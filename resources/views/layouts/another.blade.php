@@ -1,4 +1,6 @@
 @section('main')
-    @yield('content')
-    <x-particles></x-particles>
+    <main class="bg-dark-custom">
+        @yield('content')
+        <x-particles></x-particles>
+    </main>
 @endsection
