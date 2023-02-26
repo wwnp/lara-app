@@ -8,9 +8,9 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     
 </head>
-<body class="app-grid">
+<body class="app-grid ">
     <header>
-        <nav class="navbar navbar-dark bg-dark">
+        <nav class="navbar navbar-dark bg-light ">
             <div>
                 @auth
                     <a href="{{ route('login.exit')}}" class="btn btn-warning">Profile</a>
@@ -24,7 +24,7 @@
     <main>
         @yield('main')
     </main>
-    <footer class="footer text-center text-lg-start">
+    <footer class="footer text-center text-lg-start bg-dark-custom text-white">
         <div class="container p-4">
             <!--Grid row-->
             <div class="row">

@@ -1,7 +1,7 @@
 @section('main')
-    <div class="container pt-4">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col col-12 col-md-3">
+            <div class="col col-12 col-lg-2 bg-dark-custom p-1 custom-border-bottom">
                 <ul class="nav flex-column nav-pills">
 
                     @auth
@@ -13,9 +13,8 @@
                     @endif
 
                 </ul>
-
             </div>
-            <div class="col col-12 col-md-9">
+            <div class="col col-12 col-lg-10 p-0">
                 <x-notification />
                 @yield('content')
             </div>

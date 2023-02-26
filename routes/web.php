@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Auth\Session;
-use App\Http\Controllers\Categories;
 
 use App\Http\Controllers\All\Comments as AllComments;
 use App\Http\Controllers\All\Posts as AllPosts;

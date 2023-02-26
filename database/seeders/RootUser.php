@@ -17,10 +17,11 @@ class RootUser extends Seeder
     public function run()
     {
         $data = [
-            'name' => "admin",
-            'email' => "admin@example.com",
+            'name' => "achilles",
+            'email' => "achilles@example.com",
             'email_verified_at' => now(),
             'password' => Hash::make('qwe'),
+            'role' => "author",
         ];
         User::create($data);
     }

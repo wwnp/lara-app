@@ -4,11 +4,19 @@
 // Variables
 @import 'variables';
 // @import 'spinner.scss';
+@import 'fonts.scss';
+@import 'custom-grid.scss';
+@import 'custom-colors.scss';
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
+html {
+    font-family: 'IBMPlexSans';
+}
+
 body {
+    // box-sizing: border-box;
     height: 100%;
 }
 main {
@@ -27,9 +35,7 @@ main {
 }
 
 .footer {
-    background-color: $dark;
     margin-top: auto;
-    color: white;
 }
 
 .app-grid{
@@ -51,6 +57,14 @@ main {
     background-size: cover;
     background-position: 50% 50%;
     z-index: 0;
+}
+
+//
+.custom-border-left {
+    border-left: 1px solid $border-dark;
+}
+.custom-border-bottom {
+    border-bottom: 1px solid $border-dark;
 }
   
   

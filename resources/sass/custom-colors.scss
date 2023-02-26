@@ -1,0 +1,15 @@
+$theme-colors: (
+    "primary": #007bff,
+    "secondary": #6c757d,
+    "success": #28a745,
+    "info": #17a2b8,
+    "warning": #ffc107,
+    "danger": #dc3545,
+    "light": #f8f9fa,
+    "dark": #343a40,
+    "custom-color": #161616, // add your custom color here
+);
+
+.bg-dark-custom {
+    background-color: map-get($theme-colors, "custom-color") !important; // replace "custom-color" with your custom color's name
+}

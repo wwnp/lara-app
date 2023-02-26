@@ -7,3 +7,4 @@ limit comment number to 5 from 1 user; and 30 in all
 make admin posts.index in table structure
 translation to rus , everything
 html tags in content textarea +-
+sort in posts.index by newest to oldest
