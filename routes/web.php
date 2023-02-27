@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Auth\Session;
-use App\Http\Controllers\Auth\Profile;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\ProfileController;
 
 use App\Http\Controllers\All\Comments as AllComments;
 use App\Http\Controllers\All\Posts as AllPosts;
@@ -99,19 +99,18 @@ Route::post('/comments', [AllComments::class, 'store'])->name("comments.store");
 
 // Route::post('/comments/new', [Comments::class, 'new'])->name("comments.new");
 
-
-
-
-
-Route::controller(Session::class)->group(function () {
+Route::controller(AuthenticatedSessionController::class)->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('/auth/login', 'create')->name("login.create");
         Route::post('/auth/login', 'store')->name("login.store");
     });
 });
 Route::middleware('auth')->group(function () {
-    Route::get('/auth/profile', [Profile::class, 'index'])->name("profile.index");
-    Route::delete('/auth/profile', [Profile::class, 'destroy'])->name("profile.destroy");
+    // Route::get('/auth/profile', [App\Http\Controllers\Auth\ProfileController::class, 'index'])->name("profile.index");
+    Route::get('/auth/profile', [ProfileController::class, 'index'])->name("profile.index");
+    Route::delete('/auth/profile', [ProfileController::class, 'destroy'])->name("profile.destroy");
+    Route::get('/auth/profile/edit', [ProfileController::class, 'edit'])->name("profile.edit");
+    Route::put('/auth/profile/edit', [ProfileController::class, 'update'])->name("profile.update");
 });
 
 

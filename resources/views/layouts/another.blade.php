@@ -1,6 +1,7 @@
 @section('main')
     <main class="bg-dark-custom">
-        @yield('content')
+        <div class="pt-5">@yield('content')</div>
+        
         <x-particles></x-particles>
     </main>
 @endsection

@@ -13,12 +13,6 @@
         <nav class="navbar navbar-dark bg-light ">
             <div>
                 <x-nav-header></x-nav-header>
-                {{-- @auth
-                    <a href="{{ route('auth.profile')}}" class="btn btn-warning">Profile</a>
-                @else
-                    <a href="{{ route('login.create')}}" class="btn btn-success">Login</a>
-                @endif --}}
-                {{-- <a href="{{ route('posts.index')}}" class="btn btn-info">Posts</a> --}}
             </div>
         </nav>
     </header>

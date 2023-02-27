@@ -2,6 +2,6 @@
 <script src="{{ asset('js/particles.js') }}"></script>
 <script>
    window.addEventListener('load', () => {
-       particlesJS.load('particles-js', '../js/particles.json');
+       particlesJS.load('particles-js', '{{ asset("js/particles.json") }}');
    });
 </script>

@@ -12,5 +12,9 @@ return [
     'comments.create' => [
         'type' => 'success',
         'text' => 'Commentary has added successfully. It\'ll be posted after moderation'
+    ],
+    'profile.updated' => [
+        'type' => 'success',
+        'text' => 'Profile has updated successfully'
     ]
 ];

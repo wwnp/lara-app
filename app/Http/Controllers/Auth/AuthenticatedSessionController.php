@@ -7,22 +7,20 @@ use App\Http\Requests\Auth\Login as LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Session extends Controller
+class AuthenticatedSessionController extends Controller
 {
     public function create()
     {
         return view('auth.login');
     }
+
     public function store(LoginRequest $request)
     {
         $request->authenticate();
         $request->session()->regenerate();
         return redirect()->intended('posts');
     }
-    // public function profile()
-    // {
-    //     return view('auth.profile');
-    // }
+    
     public function destroy(Request $request)
     {
         Auth::guard('web')->logout();
