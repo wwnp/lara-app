@@ -7,7 +7,7 @@ $messages = $hasMessage ? config('app-notifications') : [];
 @endphp
 
 @if($hasMessage)
-<div class="mb-4 alert alert-{{ $messages[$message]['type'] }} ">
+<div class="mb-4 alert alert-{{ $messages[$message]['type'] }} " id="notificationStatus">
     {{ $messages[$message]['text'] }}
 </div>
 @endif

@@ -13,14 +13,17 @@ class ProfileController extends Controller
 {
     public function index(): View
     {
+
         $user = Auth::user();
         return view('auth.profile.index', compact('user'));
     }
+
     public function edit(): View
     {
         $user = Auth::user();
         return view('auth.profile.edit', compact('user'));
     }
+
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
@@ -31,17 +34,10 @@ class ProfileController extends Controller
 
     public function update(ProfileUpdateRequest  $request): RedirectResponse
     {
-
         $request->user()->fill($request->validated());
-
-
-        // $request->user()->avatar_url = $request->validated()['avatar_url'] ?? null;
-        // dd($request->user());
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
-
-
         $request->user()->save();
         return redirect()->route('profile.index')->with('notification', 'profile.updated');
     }

@@ -10,11 +10,13 @@
 </head>
 <body class="app-grid ">
     <header>
-        <nav class="navbar navbar-dark bg-light ">
-            <div>
-                <x-nav-header></x-nav-header>
-            </div>
-        </nav>
+        <div class="container-fluid">
+            <nav class="navbar navbar-dark bg-light ">
+                <div>
+                    <x-nav-header></x-nav-header>
+                </div>
+            </nav>
+        </div>
     </header>
 
     @yield('main')

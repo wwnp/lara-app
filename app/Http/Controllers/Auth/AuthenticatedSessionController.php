@@ -11,7 +11,7 @@ class AuthenticatedSessionController extends Controller
 {
     public function create()
     {
-        return view('auth.login');
+        return view('auth.login.create');
     }
 
     public function store(LoginRequest $request)
@@ -20,7 +20,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
         return redirect()->intended('posts');
     }
-    
+
     public function destroy(Request $request)
     {
         Auth::guard('web')->logout();

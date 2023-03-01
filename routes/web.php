@@ -2,18 +2,18 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ProfileController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 use App\Http\Controllers\All\Comments as AllComments;
 use App\Http\Controllers\All\Posts as AllPosts;
 
-
-
 use App\Http\Controllers\Tags as AdminTags;
 use App\Http\Controllers\Videos as AdminVideos;
+
 use App\Http\Controllers\Admin\Comments as AdminComments;
 use App\Http\Controllers\Admin\Categories as AdminCategories;
 use App\Http\Controllers\Admin\Posts as AdminPosts;
-
+use App\Http\Controllers\Auth\PasswordChange;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return 123;
 // });
-
+Auth::routes(['verify' => true]);
 
 Route::middleware('auth', 'auth.admin')->prefix("admin")->group(function () {
     Route::controller(AdminComments::class)->group(function () {
@@ -64,7 +64,6 @@ Route::middleware('auth', 'auth.admin')->prefix("admin")->group(function () {
     //     Route::delete('/comments/{id}', 'destroy')->name("comments.destroy");
     // });
 });
-
 
 Route::get('/posts', [AllPosts::class, 'index'])->name("posts.index");
 Route::get('/posts/slug/{slug}', [AllPosts::class, 'slug'])->name("posts.slug");
@@ -105,12 +104,21 @@ Route::controller(AuthenticatedSessionController::class)->group(function () {
         Route::post('/auth/login', 'store')->name("login.store");
     });
 });
+
+Route::middleware('guest')->group(function () {
+    Route::get('/auth/signup', [RegisteredUserController::class, 'create'])->name("signup.create");
+    Route::post('/auth/signup', [RegisteredUserController::class, 'store'])->name("signup.store");
+});
+
+
+
 Route::middleware('auth')->group(function () {
-    // Route::get('/auth/profile', [App\Http\Controllers\Auth\ProfileController::class, 'index'])->name("profile.index");
     Route::get('/auth/profile', [ProfileController::class, 'index'])->name("profile.index");
     Route::delete('/auth/profile', [ProfileController::class, 'destroy'])->name("profile.destroy");
     Route::get('/auth/profile/edit', [ProfileController::class, 'edit'])->name("profile.edit");
     Route::put('/auth/profile/edit', [ProfileController::class, 'update'])->name("profile.update");
+
+    Route::put('/password', [PasswordChange::class, 'update'])->name("password.update");
 });
 
 

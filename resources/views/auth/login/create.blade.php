@@ -2,7 +2,7 @@
 @extends('layouts.another')
 @section('content')
 <div class="container ">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center align-items-center">
         <div class="col-10 col-lg-4" style="z-index:1; position:relative">
             <div class="card mt-5 p-2" >
                 <div class="card-header text-center">
@@ -20,9 +20,9 @@
                         <div class="mb-3">
                             <x-form-checkbox name="remember" label="Remember" checked />
                         </div>
-                        {{-- <div class="mb-3">
+                        <div class="mb-3">
                             <x-recaptcha name="g-recaptcha-response" > </x-recaptcha>
-                        </div> --}}
+                        </div>
                         <div class="row">
                             <button type="submit" class="btn btn-primary">Login</button>
                         </div>

@@ -1,0 +1,12 @@
+#notificationStatus {
+    animation: fadeOut 0.5 ease;
+  }
+  
+@keyframes fadeOut {
+from {
+    opacity: 1;
+}
+to {
+    opacity: 0;
+}
+}

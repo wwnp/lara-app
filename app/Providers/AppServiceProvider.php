@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        Paginator::useBootstrap();
+        Paginator::useBootstrapFive();
         // Validator::extend('recaptcha', RecaptchaRule::class . '@passes');
         DB::beforeExecuting(function ($sql, $params) {
             // ob_start();
