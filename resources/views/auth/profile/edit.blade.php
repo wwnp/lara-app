@@ -32,7 +32,7 @@
                 <x-form method="put" action="{{ route('password.update') }}">
                     @csrf
                     <div class="mb-3">
-                        <x-form-input name="current_password" label="{{ Str::title(trans('validation.attributes.current_password')) }}" type="password"></x-form-input>
+                        <x-form-input name="current" label="{{ Str::title(trans('validation.attributes.current_password')) }}" type="password"></x-form-input>
                     </div>
                     <div class="mb-3">
                         <x-form-input name="password" label="{{ Str::title(trans('validation.attributes.new_password')) }}" type="password"></x-form-input>

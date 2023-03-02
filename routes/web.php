@@ -13,6 +13,11 @@ use App\Http\Controllers\Videos as AdminVideos;
 use App\Http\Controllers\Admin\Comments as AdminComments;
 use App\Http\Controllers\Admin\Categories as AdminCategories;
 use App\Http\Controllers\Admin\Posts as AdminPosts;
+
+use App\Http\Controllers\Author\Posts as AuthorPosts;
+
+
+
 use App\Http\Controllers\Auth\PasswordChange;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -48,22 +53,12 @@ Route::middleware('auth', 'auth.admin')->prefix("admin")->group(function () {
     Route::resource('tags', AdminTags::class)->parameters(["tags" => "id"]);
     Route::resource('videos', AdminVideos::class)->parameters(["videos" => "id"]);
     Route::resource('posts', AdminPosts::class)->parameters(["posts" => "id"]);
-
-    // Route::controller(AdminPosts::class)->group(function () {
-    //     Route::get('/posts', 'index')->name("posts.index");
-    //     Route::get('/posts/{id}', 'show')->name("posts.show");
-    // });
-
-    // Route::controller(AdminCategories::class)->group(function () {
-    //     Route::get('/comments', 'index')->name("comments.index");
-    //     Route::put('/comments/{id}/approve', 'approve')->name("comments.approve");
-    //     Route::put('/comments/{id}/restore', 'restore')->name("comments.restore");
-    //     Route::put('/comments/{id}/decline', 'decline')->name("comments.decline");
-    //     Route::get('/comments/new', 'new')->name("comments.new");
-    //     Route::post('/comments/new', 'new')->name("comments.new");
-    //     Route::delete('/comments/{id}', 'destroy')->name("comments.destroy");
-    // });
 });
+
+// Route::middleware('auth', 'auth.author')->group(function () {
+//     Route::resource('posts', AuthorPosts::class)->parameters(["posts" => "id"]);
+// });
+
 
 Route::get('/posts', [AllPosts::class, 'index'])->name("posts.index");
 Route::get('/posts/slug/{slug}', [AllPosts::class, 'slug'])->name("posts.slug");

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ config('app.name', 'Laravel') }}</title>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    
+
 </head>
 <body class="app-grid ">
     <header>

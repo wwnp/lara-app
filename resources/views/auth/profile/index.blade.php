@@ -6,6 +6,7 @@
         <div class="col-md-6 col-lg-4" style="z-index:1; position:relative">
             <div class="card">
                 <div class="card-body">
+                    
                     <div class="d-flex align-items-center justify-content-center mb-3">
                         <div class="avatar border rounded-circle overflow-hidden mr-3">
                             <img src="{{ $user->avatar_url }}" alt="Avatar Image" class="w-100">

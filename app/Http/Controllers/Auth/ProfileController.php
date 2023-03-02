@@ -13,7 +13,6 @@ class ProfileController extends Controller
 {
     public function index(): View
     {
-
         $user = Auth::user();
         return view('auth.profile.index', compact('user'));
     }

@@ -8,6 +8,9 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Enums\Comment\Status as CommentStatus;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
 
 class Posts extends Controller
 {
@@ -29,7 +32,6 @@ class Posts extends Controller
     {
         $category = Category::where("slug", $slug)->first();
         $posts = $category->posts()->paginate(5)->onEachSide(2);
-        // dd($posts);
         return view('posts.slug', compact("posts"));
     }
 }

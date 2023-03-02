@@ -1,6 +1,7 @@
 @extends('layouts.global')
 @extends('layouts.main')
 @section('content')
+<script src="{{ asset('js/prism.js') }}"></script>
 <article>
     <div class="container">
         <div class="row">
@@ -10,7 +11,44 @@
                     <p class="text-muted text-center">Written by John Doe on June 1, 2022</p>
                   </header>
                   <section>
-                      <p>{!! $post->content !!}</p>
+                    {{-- <iframe
+                        src=" https://phpsandbox.io/e/x/hw4y8?layout=EditorPreview&defaultPath=%2F&theme=dark&showExplorer=no&openedFiles= "
+                        style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+                        allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+                        sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+                    ></iframe> --}}
+                    <pre>
+                        <code class="language-js">
+                            class User extends Authenticatable implements MustVerifyEmail
+                            {
+                                use HasApiTokens, HasFactory, Notifiable;
+                            
+                                protected $fillable = [
+                                    'name',
+                                    'email',
+                                    'password',
+                                    // 'role',
+                                    'avatar_url',
+                                    // 'password_confirmation',
+                                ];
+                            
+                                protected $hidden = [
+                                    'password',
+                                    'remember_token',
+                                ];
+                            
+                                protected $casts = [
+                                    'email_verified_at' => 'datetime',
+                                ];
+                            
+                                // public function sendEmailVerificationNotification()
+                                // {
+                                //     $this->notify(new VerifyEmail);
+                                // }
+                            }
+                        </code>
+                    </pre>
+                      {{-- <p>{!! $post->content !!}</p> --}}
                       {{-- <p>{{ $post->content }}</p> --}}
                   </section>
                   <footer class="mt-4">
@@ -61,4 +99,10 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        Prism.highlightAll();
+        console.log(123)
+    });
+</script>
 @endsection
