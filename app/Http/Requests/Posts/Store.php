@@ -9,7 +9,7 @@ use App\Rules\CleanHtml;
 use App\Rules\ContentTagsOnly;
 use Illuminate\Foundation\Http\FormRequest;
 
-class Save extends FormRequest
+class Store extends FormRequest
 {
 
 
@@ -22,17 +22,17 @@ class Save extends FormRequest
     {
         return [
             'title' => 'required|min:3|max:128',
+            // 'content' => ['required'],
             'content' => ['required'],
-            // 'content' => ['required', new CleanHtml],
             // 'content' => ['required', new ContentTagsOnly],
             'category_id' => 'required|numeric',
             'tags' => ['required', 'array', new AllInModel(Tag::class)],
             // 'tags' => 'required|array',
             // 'tags' => 'required|exists:tags,id',
-            'birth_year' => [
-                'required',
-                new BirthYearRule()
-            ]
+            // 'birth_year' => [
+            //     'required',
+            //     new BirthYearRule()
+            // ]
         ];
     }
 

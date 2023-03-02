@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Post;
-use App\Http\Requests\Posts\Save as SaveRequest;
+use App\Http\Requests\Posts\Store as StoreRequest;
 use App\Models\Category;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class Posts extends Controller
         return view("posts.create", compact("cats", "tags", "postTags"));
     }
 
-    public function store(SaveRequest $request)
+    public function store(StoreRequest $request)
     {
 
         $data = $request->validated();
@@ -39,7 +39,7 @@ class Posts extends Controller
         return view('posts.edit', compact('post', 'cats', 'tags'));
     }
 
-    public function update(SaveRequest $request, $id)
+    public function update(StoreRequest $request, $id)
     {
 
         $data = $request->validated();

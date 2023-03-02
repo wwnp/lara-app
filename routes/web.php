@@ -9,34 +9,17 @@ use App\Http\Controllers\All\Posts as AllPosts;
 
 use App\Http\Controllers\Tags as AdminTags;
 use App\Http\Controllers\Videos as AdminVideos;
-
 use App\Http\Controllers\Admin\Comments as AdminComments;
 use App\Http\Controllers\Admin\Categories as AdminCategories;
 use App\Http\Controllers\Admin\Posts as AdminPosts;
 
 use App\Http\Controllers\Author\Posts as AuthorPosts;
 
-
-
 use App\Http\Controllers\Auth\PasswordChange;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-// */
-
-// Route::get('/', function () {
-//     return 123;
-// });
-Auth::routes(['verify' => true]);
+// Auth::routes(['verify' => true]);
 
 Route::middleware('auth', 'auth.admin')->prefix("admin")->group(function () {
     Route::controller(AdminComments::class)->group(function () {
@@ -48,29 +31,60 @@ Route::middleware('auth', 'auth.admin')->prefix("admin")->group(function () {
         Route::post('/comments/new', 'new')->name("comments.new");
         Route::delete('/comments/{id}', 'destroy')->name("comments.destroy");
     });
-
     Route::resource('categories', AdminCategories::class)->parameters(["categories" => "id"]);
     Route::resource('tags', AdminTags::class)->parameters(["tags" => "id"]);
     Route::resource('videos', AdminVideos::class)->parameters(["videos" => "id"]);
     Route::resource('posts', AdminPosts::class)->parameters(["posts" => "id"]);
 });
 
-// Route::middleware('auth', 'auth.author')->group(function () {
-//     Route::resource('posts', AuthorPosts::class)->parameters(["posts" => "id"]);
-// });
-
-
 Route::get('/posts', [AllPosts::class, 'index'])->name("posts.index");
 Route::get('/posts/slug/{slug}', [AllPosts::class, 'slug'])->name("posts.slug");
 Route::get('/posts/{id}', [AllPosts::class, 'show'])->name("posts.show");
+Route::post('/comments', [AllComments::class, 'store'])->name("comments.store");
+
+
+
+
+
+// Route::controller(AuthenticatedSessionController::class)->group(function () {
+//     Route::middleware('guest')->group(function () {
+//         Route::get('/auth/login', 'create')->name("login.create");
+//         Route::post('/auth/login', 'store')->name("login.store");
+//     });
+// });
+
+Route::middleware('guest')->group(function () {
+    Route::get('/auth/login', [AuthenticatedSessionController::class, 'create'])->name("login.create");
+    Route::post('/auth/login', [AuthenticatedSessionController::class, 'store'])->name("login.store");
+
+    Route::get('/auth/signup', [RegisteredUserController::class, 'create'])->name("signup.create");
+    Route::post('/auth/signup', [RegisteredUserController::class, 'store'])->name("signup.store");
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/auth/profile', [ProfileController::class, 'index'])->name("profile.index");
+    Route::delete('/auth/profile', [ProfileController::class, 'destroy'])->name("profile.destroy");
+    Route::get('/auth/profile/edit', [ProfileController::class, 'edit'])->name("profile.edit");
+    Route::put('/auth/profile/edit', [ProfileController::class, 'update'])->name("profile.update");
+
+    Route::put('/password', [PasswordChange::class, 'update'])->name("password.update");
+});
+
+
+
+
+
+
+
+// Route::middleware('auth', 'auth.author')->group(function () {
+//     Route::resource('posts', AuthorPosts::class)->parameters(["posts" => "id"]);
+// });
 
 // Route::controller(AllPosts::class)->group(function () {
 //     Route::get('/posts', 'index')->name("posts.index");
 //     Route::get('/posts/{slug}', 'slug')->parameter("posts", "slug")->name("posts.slug");
 //     Route::get('/posts/{id}', 'show')->parameter("posts", "id")->name("posts.show");
 // });
-Route::post('/comments', [AllComments::class, 'store'])->name("comments.store");
-
 
 // Route::resource('posts', Posts::class)->parameters(["posts" => "id"]);
 // Route::middleware('auth')->group(function () {
@@ -93,28 +107,7 @@ Route::post('/comments', [AllComments::class, 'store'])->name("comments.store");
 
 // Route::post('/comments/new', [Comments::class, 'new'])->name("comments.new");
 
-Route::controller(AuthenticatedSessionController::class)->group(function () {
-    Route::middleware('guest')->group(function () {
-        Route::get('/auth/login', 'create')->name("login.create");
-        Route::post('/auth/login', 'store')->name("login.store");
-    });
-});
 
-Route::middleware('guest')->group(function () {
-    Route::get('/auth/signup', [RegisteredUserController::class, 'create'])->name("signup.create");
-    Route::post('/auth/signup', [RegisteredUserController::class, 'store'])->name("signup.store");
-});
-
-
-
-Route::middleware('auth')->group(function () {
-    Route::get('/auth/profile', [ProfileController::class, 'index'])->name("profile.index");
-    Route::delete('/auth/profile', [ProfileController::class, 'destroy'])->name("profile.destroy");
-    Route::get('/auth/profile/edit', [ProfileController::class, 'edit'])->name("profile.edit");
-    Route::put('/auth/profile/edit', [ProfileController::class, 'update'])->name("profile.update");
-
-    Route::put('/password', [PasswordChange::class, 'update'])->name("password.update");
-});
 
 
 

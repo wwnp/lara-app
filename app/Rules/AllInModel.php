@@ -19,8 +19,6 @@ class AllInModel implements Rule
         foreach ($value as $id) {
 
             if (!preg_match('/^[1-9]+\d*$/', $id)) {
-                dd($id);
-                // if (!preg_match('/^[1-9]+\d*$/', $id)) {
                 return false;
             }
         }

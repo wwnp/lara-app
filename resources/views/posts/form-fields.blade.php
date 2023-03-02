@@ -1,9 +1,33 @@
-<x-form-input name="title" label="Title" type="text" />
-<x-form-textarea name="content" label="Content" type="text" v-html="formData.content" rows="10"/>
-<x-form-select name="category_id" placeholder="Choose..." :options="$cats" label="Category"></x-form-select>
-<x-form-input name="birth_year" label="Birth year" type="number" default="1990"/>
+<div class="row">
+    <div class="col-md-6">
+        <x-form-input name="title" label="Title" type="text" />
 
-<x-form-select name="tags[]" label="Теги" :options="$tags" multiple many-relation></x-form-select>
+        {{-- <x-form-select name="tags[]" label="Теги" :options="$tags" multiple many-relation></x-form-select> --}}
+    </div>
+    <div class="col-md-6">
+        <x-form-select name="category_id" placeholder="Choose..." :options="$cats" label="Category"></x-form-select>
+        {{-- <x-form-input name="birth_year" label="Birth year" type="number" default="1990"/> --}}
+    </div>
+
+    <div class="col-md-12">
+        <x-form-select name="tags[]" style="display: none" multiple id="my_select"></x-form-select>
+        <div class="form-group mt-2">
+            <div class="btn-group" role="group" aria-label="Selected Button Group" id="js_btnsTag">
+                @foreach ($tags as $id => $title)
+                        <button type="button" class="btn btn-dark btn-sm" data-id="{{ $id }}">{{ $title }}</button>
+                @endforeach
+                </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <x-form-textarea name="content" label="Content" type="text" v-html="formData.content" rows="18"/>
+    </div>
+</div>
+
+
+
+
 
 {{-- <x-form-select name="tags[]" style="display: none" multiple id="my_select"></x-form-select> --}}
 {{-- <div class="form-group mt-2">
@@ -13,7 +37,7 @@
         @endforeach
         </div>
 </div> --}}
-{{-- <script>    
+<script>    
     let sTags = []
     const selectEl = document.getElementById('my_select');
     const btnGroup = document.querySelector('#js_btnsTag')
@@ -38,4 +62,4 @@
             selectEl.appendChild(newOption);
         });
     })
-</script> --}}
+</script>

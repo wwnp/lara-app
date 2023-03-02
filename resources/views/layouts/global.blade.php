@@ -9,7 +9,7 @@
 
 </head>
 <body class="app-grid ">
-    <header>
+    <header class="border-bottom">
         <div class="container-fluid">
             <nav class="navbar navbar-dark bg-light ">
                 <div>
@@ -23,9 +23,41 @@
 
     <footer class="footer text-center text-lg-start bg-dark-custom text-white">
         <div class="container p-4">
-            <!--Grid row-->
             <div class="row">
-            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Links</h5>
+                <ul class="list-unstyled mb-0">
+                <li>
+                    <a href="#!" class="text-light">Link 1</a>
+                </li>
+                <li>
+                    <a href="#!" class="text-light">Link 2</a>
+                </li>
+                <li>
+                    <a href="#!" class="text-light">Link 3</a>
+                </li>
+                <li>
+                    <a href="#!" class="text-light">Link 4</a>
+                </li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-0">Links</h5>
+                <ul class="list-unstyled">
+                <li>
+                    <a href="#!" class="text-light">Link 1</a>
+                </li>
+                <li>
+                    <a href="#!" class="text-light">Link 2</a>
+                </li>
+                <li>
+                    <a href="#!" class="text-light">Link 3</a>
+                </li>
+                <li>
+                    <a href="#!" class="text-light">Link 4</a>
+                </li>
+                </ul>
+            </div>
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                 <h5 class="text-uppercase">Links</h5>
         
@@ -44,9 +76,6 @@
                 </li>
                 </ul>
             </div>
-            <!--Grid column-->
-        
-            <!--Grid column-->
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                 <h5 class="text-uppercase mb-0">Links</h5>
         
@@ -65,51 +94,7 @@
                 </li>
                 </ul>
             </div>
-            <!--Grid column-->
-        
-            <!--Grid column-->
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h5 class="text-uppercase">Links</h5>
-        
-                <ul class="list-unstyled mb-0">
-                <li>
-                    <a href="#!" class="text-light">Link 1</a>
-                </li>
-                <li>
-                    <a href="#!" class="text-light">Link 2</a>
-                </li>
-                <li>
-                    <a href="#!" class="text-light">Link 3</a>
-                </li>
-                <li>
-                    <a href="#!" class="text-light">Link 4</a>
-                </li>
-                </ul>
             </div>
-            <!--Grid column-->
-        
-            <!--Grid column-->
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h5 class="text-uppercase mb-0">Links</h5>
-        
-                <ul class="list-unstyled">
-                <li>
-                    <a href="#!" class="text-light">Link 1</a>
-                </li>
-                <li>
-                    <a href="#!" class="text-light">Link 2</a>
-                </li>
-                <li>
-                    <a href="#!" class="text-light">Link 3</a>
-                </li>
-                <li>
-                    <a href="#!" class="text-light">Link 4</a>
-                </li>
-                </ul>
-            </div>
-            <!--Grid column-->
-            </div>
-            <!--Grid row-->
         </div>
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
             <span id="currentYearId">2023</span>
@@ -121,5 +106,4 @@
     </div>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
-
 </html>
