@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\User\UserRole;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -34,6 +35,13 @@ class User extends Authenticatable implements MustVerifyEmail
     // {
     //     $this->notify(new VerifyEmail);
     // }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === UserRole::ADMIN;
+    }
+    public function isAuthor(): bool
+    {
+        return $this->role === UserRole::AUTHOR;
+    }
 }
-
-

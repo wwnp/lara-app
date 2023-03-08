@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ChangePasswordRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class PasswordChange extends Controller
 {
@@ -13,9 +14,15 @@ class PasswordChange extends Controller
     {
         $validated = $request->validated();
 
-        $request->user()->update([
-            'password' => Hash::make($validated["password"])
-        ]);
+        $request->user()->forceFill([
+            'password' => Hash::make($validated["password"]),
+            'remember_token' => Str::random(60),
+        ])->save();
+        // dd($request->user());
+
+        // $request->user()->update([
+        //     'password' => Hash::make($validated["password"])
+        // ]);
 
         return redirect()->route('profile.index')->with('notification', 'profile.updated');
     }

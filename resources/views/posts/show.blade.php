@@ -11,10 +11,7 @@
                     <p class="text-muted text-center">Written by John Doe on June 1, 2022</p>
                   </header>
                   <section>
-
-
                       <p>{!! $post->content !!}</p>
-                      {{-- <p>{{ $post->content }}</p> --}}
                   </section>
                   <footer class="mt-4">
                       @foreach ($tags as $tag)
@@ -29,9 +26,7 @@
                     DATE
                     RESOURCES  
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto rerum ipsum sunt fugit ut nihil vero ex reprehenderit ad eaque. Tempore vel pariatur commodi veritatis, facilis eum maxime quisquam nemo similique, at incidunt, cupiditate autem unde quis itaque quo maiores dolorem doloribus ab delectus sit adipisci et distinctio quam. Perspiciatis aperiam maxime repellendus aspernatur eligendi. Totam, corporis. Error, cupiditate aliquid. Autem, deserunt, saepe aperiam temporibus iure eum ipsa, ad modi quod nostrum asperiores quo nobis. Provident voluptates officia vero voluptatum nobis id dicta beatae assumenda autem debitis perferendis quam in, consequuntur perspiciatis aut reiciendis animi repellat nemo itaque fugiat sunt.
-
                 </div>
-  
             </div>
         </div>
     </div>

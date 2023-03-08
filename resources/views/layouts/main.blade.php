@@ -9,6 +9,7 @@
                         {{-- <x-navigation.link routeName="posts.slug">What is about ChatGPT</x-navigation.link> --}}
                         <x-navigation.link routeName="posts.slug" id="php">About PHP</x-navigation.link>
                         <x-navigation.link routeName="posts.slug" id="javascript">About JS</x-navigation.link>
+                        <x-navigation.link routeName="address.form">Анализ адресс</x-navigation.link>
                     </ul>
                 </div>
                 <div class="col col-12 col-lg-10 p-0">

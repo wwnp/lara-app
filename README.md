@@ -14,3 +14,34 @@ change password in profile
 verification email
 rate limiter login
 additional password for super private actions( delete account for example )
+
+
+POSTS
+admin
+    index
+    create
+    store
+    edit
+    update
+    destroy
+    show
+    slug
+------------------------------
+author
+    index
+    create 
+    store 
+    edit (own only by id)
+    update (own only by id)
+    destroy (own only by id)
+    index   
+    show
+    slug
+-------------------------------
+guest
+    index   
+    show
+    slug 
+
+
+make notification fixed like toast bootstrap

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Author;
 
 use App\Models\Post;
 use App\Http\Requests\Posts\Store as StoreRequest;
@@ -41,7 +41,6 @@ class Posts extends Controller
     {
         $post = Post::findOrFail($id);
         $tags = $post->tags()->pluck("title", "id");
-        // dd($tags);
         $cats = Category::pluck("title", "id");
         return view('posts.edit', compact('post', 'cats', 'tags'));
     }
@@ -52,9 +51,7 @@ class Posts extends Controller
         $data = $request->validated();
         $post = Post::findOrFail($id);
         $postdata = $request->safe()->only(['title', 'content', 'category_id']);
-
         $post->tags()->sync($data['tags']);
-
         $post->update($postdata);
         return redirect()->route('posts.show', [$post->id]);
     }

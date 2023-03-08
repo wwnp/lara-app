@@ -16,5 +16,9 @@ return [
     'profile.updated' => [
         'type' => 'success',
         'text' => 'Profile has updated successfully'
+    ],
+    'profile.need_verified' => [
+        'type' => 'danger',
+        'text' => 'Need to verify your account'
     ]
 ];

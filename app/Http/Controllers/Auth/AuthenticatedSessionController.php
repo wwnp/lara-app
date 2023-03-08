@@ -18,7 +18,7 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
         $request->session()->regenerate();
-        return redirect()->intended('posts');
+        return redirect()->intended('/posts');
     }
 
     public function destroy(Request $request)
