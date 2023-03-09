@@ -23,37 +23,44 @@ use Illuminate\Support\Facades\Route;
 
 // Auth::routes(['verify' => true]);
 
-Route::middleware(['admin'])->prefix("admin")->group(function () {
-    // dd(Auth::user());
-    Route::resource('posts', AdminPosts::class)->parameters(["posts" => "id"]);
-    Route::get('/comments', [AdminComments::class, 'index'])->name("comments.index");
-    Route::post('/comments', [AdminComments::class, 'store'])->name("comments.store");
-    Route::put('/comments/{id}/approve', [AdminComments::class, 'approve'])->name("comments.approve");
-    Route::put('/comments/{id}/restore', [AdminComments::class, 'restore'])->name("comments.restore");
-    Route::put('/comments/{id}/decline', [AdminComments::class, 'decline'])->name("comments.decline");
-    Route::get('/comments/new', [AdminComments::class, 'new'])->name("comments.new");
-    Route::post('/comments/new', [AdminComments::class, 'new'])->name("comments.new");
-    Route::delete('/comments/{id}', [AdminComments::class, 'destroy'])->name("comments.destroy");
 
-    Route::resource('categories', AdminCategories::class)->parameters(["categories" => "id"]);
-    Route::resource('tags', AdminTags::class)->parameters(["tags" => "id"]);
-    Route::resource('videos', AdminVideos::class)->parameters(["videos" => "id"]);
-    Route::get('posts/slug/{slug}', [AdminPosts::class, 'slug'])->name("posts.slug");
+
+
+Route::middleware(['auth', 'verified', 'admin'])->group(function () {
+    Route::resource('posts', AdminPosts::class, ['as' => 'admin'])->parameters(["posts" => "id"]);
+    Route::get('/comments', [AdminComments::class, 'index'])->name("admin.comments.index");
+    Route::post('/comments', [AdminComments::class, 'store'])->name("admin.comments.store");
+    Route::put('/comments/{id}/approve', [AdminComments::class, 'approve'])->name("admin.comments.approve");
+    Route::put('/comments/{id}/restore', [AdminComments::class, 'restore'])->name("admin.comments.restore");
+    Route::put('/comments/{id}/decline', [AdminComments::class, 'decline'])->name("admin.comments.decline");
+    Route::get('/comments/new', [AdminComments::class, 'new'])->name("admin.comments.new");
+    Route::post('/comments/new', [AdminComments::class, 'new'])->name("admin.comments.new");
+    Route::delete('/comments/{id}', [AdminComments::class, 'destroy'])->name("admin.comments.destroy");
+
+    Route::resource('categories', AdminCategories::class, ['as' => 'admin'])->parameters(["categories" => "id"]);
+    Route::resource('tags', AdminTags::class, ['as' => 'admin'])->parameters(["tags" => "id"]);
+    Route::resource('videos', AdminVideos::class, ['as' => 'admin'])->parameters(["videos" => "id"]);
+    Route::get('posts/slug/{slug}', [AdminPosts::class, 'slug'])->name("admin.posts.slug");
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::post('/comments', [AuthorComments::class, 'store'])->name("comments.store");
+Route::middleware(['auth', 'verified', 'author'])->group(function () {
+    //
+    Route::post('/comments', [AuthorComments::class, 'store'])->name("author.comments.store");
 
-    Route::get('posts/slug/{slug}', [AuthorPosts::class, 'slug'])->name("posts.slug");
-    Route::resource('posts', AuthorPosts::class)->parameters(["posts" => "id"]);
+    Route::get('posts/slug/{slug}', [AuthorPosts::class, 'slug'])->name("author.posts.slug");
+    Route::resource('posts', AuthorPosts::class, ['as' => 'author'])->parameters(["posts" => "id"]);
 
-    Route::get('/address', [Address::class, 'form'])->name("address.form");
-    Route::post('/address', [Address::class, 'parse'])->name("address.parse");
+    // Route::get('/address', [Address::class, 'form'])->name("author.address.form");
+    // Route::post('/address', [Address::class, 'parse'])->name("author.address.parse");
 });
 
-Route::post('/comments', [GuestComments::class, 'store'])->name("comments.store");
-Route::get('posts/slug/{slug}', [GuestPosts::class, 'slug'])->name("posts.slug");
-Route::resource('posts', GuestPosts::class)->parameters(["posts" => "id"]);
+
+Route::middleware(['guest'])->group(function () {
+    Route::post('/comments', [GuestComments::class, 'store'])->name("guest.comments.store");
+    Route::get('posts/slug/{slug}', [GuestPosts::class, 'slug'])->name("guest.posts.slug");
+    Route::resource('posts', GuestPosts::class, ['as' => 'guest'])->parameters(["posts" => "id"]);
+});
+
 
 
 

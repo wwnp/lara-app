@@ -44,4 +44,9 @@ guest
     slug 
 
 
+
+
 make notification fixed like toast bootstrap
+
+
+give role by admin page;

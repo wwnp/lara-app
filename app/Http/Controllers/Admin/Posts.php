@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Tag;
 use App\Http\Controllers\Controller;
 use App\Enums\Comment\Status as CommentStatus;
+use Illuminate\Support\Facades\Route;
 
 class Posts extends Controller
 {

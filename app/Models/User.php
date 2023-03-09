@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Role;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -36,12 +37,17 @@ class User extends Authenticatable implements MustVerifyEmail
     //     $this->notify(new VerifyEmail);
     // }
 
-    public function isAdmin(): bool
+    // public function isAdmin(): bool
+    // {
+    //     return $this->role === UserRole::ADMIN;
+    // }
+    // public function isAuthor(): bool
+    // {
+    //     return $this->role === UserRole::AUTHOR;
+    // }
+
+    public function roles()
     {
-        return $this->role === UserRole::ADMIN;
-    }
-    public function isAuthor(): bool
-    {
-        return $this->role === UserRole::AUTHOR;
+        return $this->belongsToMany(Role::class);
     }
 }

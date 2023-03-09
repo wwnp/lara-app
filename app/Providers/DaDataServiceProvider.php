@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Dadata\DadataClient;
+use Illuminate\Support\Facades\Route;
 
 class DaDataServiceProvider extends ServiceProvider
 {

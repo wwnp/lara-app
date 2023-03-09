@@ -14,6 +14,7 @@
             <nav class="navbar navbar-dark bg-light ">
                 <div>
                     <x-nav-header></x-nav-header>
+                    The current route name is {{ Route::currentRouteName() }}
                 </div>
             </nav>
         </div>

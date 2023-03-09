@@ -14,14 +14,14 @@
         <div class="list-group">
             @foreach ($posts as $post)
                 <div class="mb-3">
-                    <a href="{{ route('posts.show',$post->id) }}" class="list-group-item list-group-item-action">
+                    {{-- <a href="{{ route('guest.posts.show',$post->id) }}" class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{ $post->title }}</h5>
                         <small>{{$post->created_at  }}</small>
                         </div>
                         <p class="mb-1">{{ $post->category->title }}</p>
                         <p class="mb-1">Comments: {{$post->comments_count}} </p>
-                    </a>
+                    </a> --}}
                 </div>
             @endforeach
         </div>
