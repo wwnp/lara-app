@@ -17,7 +17,7 @@ additional password for super private actions( delete account for example )
 
 comments:
 autoscroll comments
-chaining comments like in board and highlight it
+chaining comments like aboard and highlight it if answer
 
 =====================
 admin
@@ -80,12 +80,12 @@ signup
 
 edit profile
 
-
-
-
-
-
-
 make notification fixed like toast bootstrap
 
 give role by admin table page;
+
+rf 'зарегестрироваться' to 'стать автором', send email to gmail 
+
+AuthServiceProvider make enum instead of admin author moderator strings
+
+add user_id to posts and setup relations between posts and users; in Post: user() belongsTo(User::class) in User: hasMany(Post::class)

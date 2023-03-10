@@ -14,7 +14,7 @@ class Post extends Model
     use SoftDeletes;
 
     // protected $guarded = []; // Error : Array to string conversion
-    protected $fillable = ['title', 'content', 'category_id', "tags"];
+    protected $fillable = ['title', 'content', 'category_id', "tags", "user_id"];
     protected $casts = [
         "status" => Status::class,
         "options" => Base64Json::class,
@@ -34,5 +34,10 @@ class Post extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

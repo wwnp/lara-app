@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Tag;
 use App\Http\Controllers\Controller;
 use App\Enums\Comment\Status as CommentStatus;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 class Posts extends Controller
@@ -30,9 +31,12 @@ class Posts extends Controller
 
     public function store(StoreRequest $request)
     {
-
+        $user = Auth::user();
         $data = $request->validated();
+        // dd($data);
         $postdata = $request->safe()->only(['title', 'content', 'category_id']);
+        $postdata["user_id"] = $user->id;
+        // dd($postdata);
         $post = Post::create($postdata);
         $post->tags()->sync($data['tags']);
         return redirect()->route('posts.show', [$post->id]);
@@ -48,9 +52,10 @@ class Posts extends Controller
 
     public function update(StoreRequest $request, $id)
     {
-
         $data = $request->validated();
         $post = Post::findOrFail($id);
+
+        $this->authorize('update', $post);
         $postdata = $request->safe()->only(['title', 'content', 'category_id']);
 
         $post->tags()->sync($data['tags']);

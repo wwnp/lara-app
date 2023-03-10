@@ -15,12 +15,20 @@
                 <div>
                     <x-nav-header></x-nav-header>
                     <h2>{{ Route::currentRouteName() }}</h2>
+                    
                     <h5>{{ Auth::user() }}</h5>
+
+                    @foreach (Auth::user()->roles()->get() as $role)
+                        <h5>{{ $role->role }}</h5>
+                    @endforeach
+
                     @if (Auth::check() && !Auth::user()->hasVerifiedEmail())
                         <div>
                             Please <a href="{{ route('verification.notice') }}">verify your email address</a>.
                         </div>
                     @endif
+
+
                 </div>
             </nav>
         </div>

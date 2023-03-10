@@ -15,7 +15,6 @@ class RouteServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        // $this->setHomeConstant();
         $this->configureRateLimiting();
 
         $this->routes(function () {
@@ -27,18 +26,6 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
     }
-
-    // protected function setHomeConstant()
-    // {
-    //     $user = Auth::user();
-    //     if ($user && $user->isAdmin()) {
-    //         define('HOME', '/nimda/posts');
-    //     } elseif ($user && $user->isAuthor()) {
-    //         define('HOME', '/rohtua/posts');
-    //     } else {
-    //         define('HOME', '/posts');
-    //     }
-    // }
 
     protected function configureRateLimiting()
     {

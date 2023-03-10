@@ -8,7 +8,10 @@
             <div class="col col-12 col-lg-10 ">
                 <header class="mb-4">
                     <h1 class="text-center">{{ $post->title }}</h1>
-                    <p class="text-muted text-center">Written by John Doe on June 1, 2022</p>
+                    <p class="text-muted text-center">Written by {{$post->user->name}} on {{$post->created_at}}</p>
+                        @can('update', $post)
+                            <h1 class="text-secondary">МОГУ РЕДАКТИРОВАТЬ</h1>
+                        @endcan
                   </header>
                   <section>
                       <p>{!! $post->content !!}</p>

@@ -1,6 +1,0 @@
-<pre>select `tags`.`id` from `tags` inner join `post_tag` on `tags`.`id` = `post_tag`.`tag_id` where `post_tag`.`post_id` = ?Array
-(
-    [0] => 1
-)
-</pre>
-
