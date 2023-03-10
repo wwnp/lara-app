@@ -20,5 +20,13 @@ return [
     'profile.need_verified' => [
         'type' => 'danger',
         'text' => 'Need to verify your account'
+    ],
+    'profile.sent_verification_email' => [
+        'type' => 'info',
+        'text' => 'Sent verification message. Check your email'
+    ],
+    'profile.verify_success' => [
+        'type' => 'info',
+        'text' => 'Successfully verified'
     ]
 ];

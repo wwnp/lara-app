@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Author;
+namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Http\Requests\Posts\Store as StoreRequest;
@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Tag;
 use App\Http\Controllers\Controller;
 use App\Enums\Comment\Status as CommentStatus;
+use Illuminate\Support\Facades\Route;
 
 class Posts extends Controller
 {
@@ -51,7 +52,9 @@ class Posts extends Controller
         $data = $request->validated();
         $post = Post::findOrFail($id);
         $postdata = $request->safe()->only(['title', 'content', 'category_id']);
+
         $post->tags()->sync($data['tags']);
+
         $post->update($postdata);
         return redirect()->route('posts.show', [$post->id]);
     }

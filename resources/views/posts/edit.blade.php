@@ -6,7 +6,7 @@
     @bind($post)
     <div class="container-fluid">
         @include('posts.form-fields')
-        <button>Update</button>
+        <button class="btn btn-success mt-2">Update</button>
     </div>
     @endbind
 </x-form>

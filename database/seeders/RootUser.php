@@ -16,12 +16,24 @@ class RootUser extends Seeder
      */
     public function run()
     {
-        $data = [
-            'name' => "achilles",
-            'email' => "achilles@example.com",
-            'email_verified_at' => now(),
-            'password' => Hash::make('qwe'),
-        ];
-        User::create($data);
+        // $data = [
+        //     'name' => "achilles",
+        //     'email' => "achilles@example.com",
+        //     'email_verified_at' => now(),
+        //     'password' => Hash::make('qwe'),
+        // ];
+        // User::create($data);
+        User::create([
+            'name' => "CatAuthor",
+            'email' => "catauthor@example.com",
+            'email_verified_at' => null,
+            'password' => Hash::make('123q'),
+        ]);
+        User::create([
+            'name' => "DogModerator",
+            'email' => "dogmoder@example.com",
+            'email_verified_at' => null,
+            'password' => Hash::make('123q'),
+        ]);
     }
 }

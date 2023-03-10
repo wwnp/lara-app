@@ -25,7 +25,16 @@
                                 <a class="btn btn-info" href="{{ route('profile.edit') }}">Изменить профиль</a>       
                             </div>
                         </div>
+                        <div class="px-2 pt-3">
+                            @if (Auth::check() && !Auth::user()->hasVerifiedEmail())
+                                <form method="POST" action="{{ route('verification.send') }}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-lg btn-success">Resend Verification Email</button>
+                                </form>
+                            @endif
+                        </div>
                     </div>
+                    
                     <div  class="card-text pt-3">
                         <x-notification />
                       </div>

@@ -14,7 +14,13 @@
             <nav class="navbar navbar-dark bg-light ">
                 <div>
                     <x-nav-header></x-nav-header>
-                    The current route name is {{ Route::currentRouteName() }}
+                    <h2>{{ Route::currentRouteName() }}</h2>
+                    <h5>{{ Auth::user() }}</h5>
+                    @if (Auth::check() && !Auth::user()->hasVerifiedEmail())
+                        <div>
+                            Please <a href="{{ route('verification.notice') }}">verify your email address</a>.
+                        </div>
+                    @endif
                 </div>
             </nav>
         </div>
