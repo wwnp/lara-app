@@ -9,6 +9,7 @@ use App\Models\Tag;
 use App\Http\Controllers\Controller;
 use App\Enums\Comment\Status as CommentStatus;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 
 class Posts extends Controller
@@ -33,10 +34,8 @@ class Posts extends Controller
     {
         $user = Auth::user();
         $data = $request->validated();
-        // dd($data);
         $postdata = $request->safe()->only(['title', 'content', 'category_id']);
         $postdata["user_id"] = $user->id;
-        // dd($postdata);
         $post = Post::create($postdata);
         $post->tags()->sync($data['tags']);
         return redirect()->route('posts.show', [$post->id]);
@@ -45,6 +44,7 @@ class Posts extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
+        Gate::authorize('posts-edit', $post);
         $tags = $post->tags()->pluck("title", "id");
         $cats = Category::pluck("title", "id");
         return view('posts.edit', compact('post', 'cats', 'tags'));

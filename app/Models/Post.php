@@ -13,7 +13,7 @@ class Post extends Model
     use HasFactory;
     use SoftDeletes;
 
-    // protected $guarded = []; // Error : Array to string conversion
+    // protected $guarded = []; // if Error : Array to string conversion
     protected $fillable = ['title', 'content', 'category_id', "tags", "user_id"];
     protected $casts = [
         "status" => Status::class,

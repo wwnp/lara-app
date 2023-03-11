@@ -18,9 +18,9 @@
                     
                     <h5>{{ Auth::user() }}</h5>
 
-                    @foreach (Auth::user()->roles()->get() as $role)
+                    {{-- @foreach (Auth::user()->roles()->get() as $role)
                         <h5>{{ $role->role }}</h5>
-                    @endforeach
+                    @endforeach --}}
 
                     @if (Auth::check() && !Auth::user()->hasVerifiedEmail())
                         <div>

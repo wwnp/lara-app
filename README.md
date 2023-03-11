@@ -88,4 +88,9 @@ rf 'зарегестрироваться' to 'стать автором', send e
 
 AuthServiceProvider make enum instead of admin author moderator strings
 
-add user_id to posts and setup relations between posts and users; in Post: user() belongsTo(User::class) in User: hasMany(Post::class)
+add user_id to posts and setup relations between posts and users; in Post: user() belongsTo(User::class) in User: hasMany(Post::class)\
+
+
+check if user matches Auth::user() in posts.show in comments section in comments.storen\
+
+123

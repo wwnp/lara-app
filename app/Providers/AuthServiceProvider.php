@@ -4,6 +4,7 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 
+use App\Models\Post;
 use App\Policies\PostPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Auth;
@@ -20,13 +21,25 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         Gate::define('admin', function ($user) {
-            return $user->roles()->where('role', 'admin')->count() > 0;
+            return $user->roles()->whereIn('role', 'admin')->count() > 0;
         });
         Gate::define('author', function ($user) {
-            return $user->roles()->where('role', 'author')->count() > 0;
+            dd($user->roles()->whereIn('role', 'author')->count());
+            return $user->roles()->whereIn('role', 'author')->count() > 0;
         });
         Gate::define('moderator', function ($user) {
-            return $user->roles()->where('role', 'moderator')->count() > 0;
+            return $user->roles()->whereIn('role', 'moderator')->count() > 0;
+        });
+
+        Gate::define('posts-create', function ($user) {
+            return $user->roles()->whereIn('role', ['author', 'admin'])->count() > 0;
+        });
+        Gate::define('posts-edit', function ($user, Post $post) {
+            // dd($user->id === $post->user_id);
+            return
+                $user->roles()->where('role', ['admin'])->count() > 0
+                ||
+                $user->id === $post->user_id;
         });
     }
 }

@@ -16,6 +16,8 @@ class PostPolicy
      *
      * @return void
      */
+
+     
     public function update(User $user, Post $post)
     {
         $role = $user->roles->first()->role;
