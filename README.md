@@ -93,4 +93,5 @@ add user_id to posts and setup relations between posts and users; in Post: user(
 
 check if user matches Auth::user() in posts.show in comments section in comments.storen\
 
-123
+when gates when policies; best case gates-policies
+

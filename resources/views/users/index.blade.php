@@ -20,10 +20,13 @@
                     @endforeach
                 </td>
                 <td>
-                    <x-form method="put" action="{{ route('roles.update', ['id' => $user->id]) }}">
+                    
+                    <x-form method="put" action="{{ route('users.manage', ['id' => $user->id]) }}">
                         <div class="container-fluid">
-                            <x-form-select name="role" placeholder="Выберите роль" label="Роли" :options="$roles" multiple many-relation></x-form-select>
+                            @bind($user)
+                            <x-form-select name="roles[]" placeholder="Выберите роль" label="Роли" :options="$roles" multiple many-relation></x-form-select>
                             <button class="btn btn-success mt-2">Send</button>
+                            @endbind
                         </div>
                     </x-form>
                     

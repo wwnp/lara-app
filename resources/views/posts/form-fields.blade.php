@@ -2,14 +2,14 @@
     <div class="col-md-6">
         <x-form-input name="title" label="Title" type="text" />
 
-        {{-- <x-form-select name="tags[]" label="Теги" :options="$tags" multiple many-relation></x-form-select> --}}
+        <x-form-select name="tags[]" label="Теги" :options="$tags" multiple many-relation></x-form-select>
     </div>
     <div class="col-md-6">
         <x-form-select name="category_id" placeholder="Choose..." :options="$cats" label="Category"></x-form-select>
         {{-- <x-form-input name="birth_year" label="Birth year" type="number" default="1990"/> --}}
     </div>
 
-    <div class="col-md-12">
+    {{-- <div class="col-md-12">
         <x-form-select name="tags[]" style="display: none" multiple id="my_select"></x-form-select>
         <div class="form-group mt-2">
             <div class="btn-group" role="group" aria-label="Selected Button Group" id="js_btnsTag">
@@ -18,7 +18,7 @@
                 @endforeach
                 </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="col-md-12">
         <x-form-textarea name="content" label="Content" type="text" v-html="formData.content" rows="18"/>

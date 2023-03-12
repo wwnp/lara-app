@@ -15,6 +15,7 @@ use App\Http\Controllers\Videos;
 use App\Http\Controllers\Auth\PasswordChange;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Roles;
+use App\Http\Controllers\UsersManage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/posts/{id}/edit', [Posts::class, 'edit'])->name("posts.edit");
     Route::put('/posts/{id}', [Posts::class, 'update'])->name("posts.update");
     Route::delete('/posts/{id}', [Posts::class, 'delete'])->name("posts.delete");
+
+    Route::get('/users', [UsersManage::class, 'index'])->name("users.index")->middleware(['can:users-manage']); // могут зайти те , кто указан в логике метода boot AuthServiceProvider Gate::define('users-manage'
+    Route::put('/users/{id}', [UsersManage::class, 'manage'])->name("users.manage")->middleware(['can:users-manage']);
 
     // Route::middleware(['can:author'])->group(function () {
     //     Route::resource('posts', Posts::class)->parameters(['posts' => 'id']);
@@ -57,7 +61,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //     Route::delete('/comments/{id}', [Comments::class, 'destroy'])->name("comments.destroy");
 
     //     Route::resource('categories', Categories::class)->parameters(["categories" => "id"]);
-    //     Route::resource('tags', Tags::class)->parameters(["tags" => "id"]);
+    Route::resource('tags', Tags::class)->parameters(["tags" => "id"]);
     //     Route::resource('videos', Videos::class)->parameters(["videos" => "id"]);
 
     //     Route::get('/address', [Address::class, 'form'])->name("address.form");

@@ -18,7 +18,7 @@ class Login extends FormRequest
         return [
             'email' => 'required|email',
             'password' => 'required',
-            'g-recaptcha-response' => 'required',
+            // 'g-recaptcha-response' => 'required',
         ];
     }
     public function messages()

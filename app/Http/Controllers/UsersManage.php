@@ -11,27 +11,25 @@ use App\Enums\Comment\Types as CommentTypes;
 use App\Models\Role;
 use App\Models\User;
 
-class Roles extends Controller
+class UsersManage extends Controller
 {
     public function index()
     {
         $roles = Role::pluck('role', 'id');
+        // $roles = Role::orderBy('role')->get();
         $users = User::whereDoesntHave('roles', function ($query) {
             $query->where('role', '=', 'admin');
         })
             ->with('roles')
             ->get();
 
-        return view('roles.index', [
-            'users' => $users,
-            'roles' => $roles,
-        ]);
+        return view('users.index', compact('roles', 'users'));
     }
 
-    public function update(Request $request, string $id)
+    public function manage(Request $request, string $id)
     {
         $user = User::findOrFail($id);
-        dd($user);
+        dd($request);
     }
 
     // public function edit($id)
