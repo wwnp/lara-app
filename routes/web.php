@@ -14,9 +14,7 @@ use App\Http\Controllers\Videos;
 
 use App\Http\Controllers\Auth\PasswordChange;
 use App\Http\Controllers\Auth\VerificationController;
-use App\Http\Controllers\Roles;
 use App\Http\Controllers\UsersManage;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,89 +30,47 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/users', [UsersManage::class, 'index'])->name("users.index")->middleware(['can:users-manage']); // могут зайти те , кто указан в логике метода boot AuthServiceProvider Gate::define('users-manage'
     Route::put('/users/{id}', [UsersManage::class, 'manage'])->name("users.manage")->middleware(['can:users-manage']);
 
-    Route::get('/comments/new', [Comments::class, 'new'])->name("comments.new")->middleware(['can:comments-manage']);
-    Route::get('/comments', [Comments::class, 'index'])->name("comments.index")->middleware(['can:comments-manage']);
-    Route::post('/comments', [Comments::class, 'store'])->name("comments.store")->middleware(['can:comments-manage']);
-    Route::put('/comments/{id}/restore', [Comments::class, 'restore'])->name("comments.restore")->middleware(['can:comments-manage']);
-    Route::put('/comments/{id}/decline', [Comments::class, 'decline'])->name("comments.decline")->middleware(['can:comments-manage']);
-    Route::put('/comments/{id}/approve', [Comments::class, 'approve'])->name("comments.approve")->middleware(['can:comments-manage']);
-    Route::delete('/comments/{id}', [Comments::class, 'destroy'])->name("comments.destroy")->middleware(['can:comments-manage']);
+    Route::middleware(['can:comments-manage'])->group(function () {
+        Route::get('/comments/new', [Comments::class, 'new'])->name("comments.new");
+        Route::get('/comments', [Comments::class, 'index'])->name("comments.index");
+        Route::post('/comments', [Comments::class, 'store'])->name("comments.store");
+        Route::put('/comments/{id}/restore', [Comments::class, 'restore'])->name("comments.restore");
+        Route::put('/comments/{id}/decline', [Comments::class, 'decline'])->name("comments.decline");
+        Route::put('/comments/{id}/approve', [Comments::class, 'approve'])->name("comments.approve");
+        Route::delete('/comments/{id}', [Comments::class, 'destroy'])->name("comments.destroy");
+    });
 
-    // Route::middleware(['can:author'])->group(function () {
-    //     Route::resource('posts', Posts::class)->parameters(['posts' => 'id']);
-    // });
-    // Route::middleware(['can:admin'])->group(function () {
-    //     Route::get('roles', [Roles::class, 'index'])->name("roles.index");
-    //     Route::put('roles/{id}', [Roles::class, 'update'])->name("roles.update");
+    Route::middleware(['can:categories-manage'])->group(function () {
+        Route::get('/categories', [Categories::class, 'index'])->name("categories.index");
+        Route::get('/categories/create', [Categories::class, 'create'])->name("categories.create");
+        Route::post('/categories', [Categories::class, 'store'])->name("categories.store");
+        Route::get('/categories/{id}/edit', [Categories::class, 'edit'])->name("categories.edit");
+        Route::put('/categories/{id}', [Categories::class, 'update'])->name("categories.update");
+    });
 
-    //     Route::get('posts/slug/{slug}', [Posts::class, 'slug'])->name("posts.slug");
-    //     Route::resource('posts', Posts::class)->parameters(['posts' => 'id']);
+    Route::middleware(['can:tags-manage'])->group(function () {
+        Route::get('/tags', [Tags::class, 'index'])->name("tags.index");
+        Route::get('/tags/create', [Tags::class, 'create'])->name("tags.create");
+        Route::post('/tags', [Tags::class, 'store'])->name("tags.store");
+        Route::get('/tags/{id}/edit', [Tags::class, 'edit'])->name("tags.edit");
+        Route::put('/tags/{id}', [Tags::class, 'update'])->name("tags.update");
+    });
 
-    // Route::get('/posts', [Posts::class, 'index'])->name("posts.index");
-    // Route::get('/posts', [Posts::class, 'create'])->name("posts.create");
-    // Route::get('/posts/{id}', [Posts::class, 'show'])->name("posts.show");
-    // Route::post('/posts', [Posts::class, 'store'])->name("posts.store");
-    // Route::get('/posts/{id}/edit', [Posts::class, 'edit'])->name("posts.edit");
-    // Route::put('/posts/{id}', [Posts::class, 'update'])->name("posts.update");
-    // Route::delete('/posts/{id}', [Posts::class, 'delete'])->name("posts.delete");
+    Route::middleware(['can:videos-manage'])->group(function () {
+        Route::get('/videos', [Videos::class, 'index'])->name("videos.index");
+        Route::get('/videos/create', [Videos::class, 'create'])->name("videos.create");
+        Route::post('/videos', [Videos::class, 'store'])->name("videos.store");
+        Route::get('/videos/{id}/edit', [Videos::class, 'edit'])->name("videos.edit");
+        Route::put('/videos/{id}', [Videos::class, 'update'])->name("videos.update");
+    });
 
-
-
-
-    //     Route::post('/comments/new', [Comments::class, 'new'])->name("comments.new");
-    //     Route::delete('/comments/{id}', [Comments::class, 'destroy'])->name("comments.destroy");
-
-    //     Route::resource('categories', Categories::class)->parameters(["categories" => "id"]);
-    Route::resource('tags', Tags::class)->parameters(["tags" => "id"]);
-    //     Route::resource('videos', Videos::class)->parameters(["videos" => "id"]);
-
-    //     Route::get('/address', [Address::class, 'form'])->name("address.form");
-    //     Route::post('/address', [Address::class, 'parse'])->name("address.parse");
-    // });
-
-
-    // Route::middleware(['can:moderator'])->group(function () {
-    //     Route::get('/comments', [Comments::class, 'index'])->name("comments.index");
-    //     Route::post('/comments', [Comments::class, 'store'])->name("comments.store");
-    //     Route::put('/comments/{id}/restore', [Comments::class, 'restore'])->name("comments.restore");
-    //     Route::put('/comments/{id}/decline', [Comments::class, 'decline'])->name("comments.decline");
-    //     Route::put('/comments/{id}/approve', [Comments::class, 'approve'])->name("comments.approve");
-    //     Route::get('/comments/new', [Comments::class, 'new'])->name("comments.new");
-    //     Route::post('/comments/new', [Comments::class, 'new'])->name("comments.new");
-    //     Route::delete('/comments/{id}', [Comments::class, 'destroy'])->name("comments.destroy");
-    // });
+    // Route::get('/address', [Address::class, 'form'])->name("address.form");
+    // Route::post('/address', [Address::class, 'parse'])->name("address.parse");
 });
 Route::get('/posts', [Posts::class, 'index'])->name("posts.index");
 Route::get('/posts/{id}', [Posts::class, 'show'])->name("posts.show");
-// Route::get('posts', [Posts::class, 'index'])->name("posts.index");
+Route::get('posts/slug/{slug}', [Posts::class, 'slug'])->name("posts.slug");
 Route::post('/comments', [Comments::class, 'store'])->name("comments.store");
-// Route::get('posts/slug/{slug}', [Posts::class, 'slug'])->name("posts.slug");
-// Route::get('posts/{id}', [Posts::class, 'show'])->name("posts.show");
-
-
-
-// Route::middleware(['auth', 'verified', 'author'])->group(function () {
-//     //
-//     Route::post('/comments', [AuthorComments::class, 'store'])->name("author.comments.store");
-
-//     Route::get('posts/slug/{slug}', [AuthorPosts::class, 'slug'])->name("author.posts.slug");
-//     Route::resource('posts', AuthorPosts::class, ['as' => 'author'])->parameters(["posts" => "id"]);
-
-
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // AUTH ---------------------------------------------
 

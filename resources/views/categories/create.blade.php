@@ -1,5 +1,5 @@
 @extends('layouts.global')
-@extends('layouts.main')
+@extends('layouts.main-foredit')
 @section('content')
 <h1>Create category</h1>
 <x-form method="post" action="{{ route('categories.store') }}">

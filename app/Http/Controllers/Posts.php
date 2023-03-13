@@ -16,9 +16,6 @@ class Posts extends Controller
 {
     public function index()
     {
-        $approvedCommentCount = function ($query) {
-            $query->where("status", CommentStatus::APPROVED->value);
-        };
         return view('posts.index', [
             "posts" => Post::with("category")
                 ->withCount([

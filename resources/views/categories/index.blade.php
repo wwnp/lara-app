@@ -1,13 +1,13 @@
 @extends('layouts.global')
-@extends('layouts.main')
+@extends('layouts.main-foredit')
 @section('content')
 <h1>POSTS</h1>
 
-@foreach ($posts as $post)
-    <h1>{{ $post->title }}</h1>
-    <h1>{{ $post->content }}</h1>
-    <h1>{{ $post->category->title }}</h1>
-    <a href="{{ route('posts.show',$post->id) }}">go into</a>
+@foreach ($categories as $category)
+    <h1>{{ $category->title }}</h1>
+    <h1>{{ $category->slug }}</h1>
+    {{-- <h1>{{ $post->category->title }}</h1> --}}
+    <a href="{{ route('categories.edit',$category->id) }}">Изменить категорию</a>
     <hr>
 @endforeach
 
