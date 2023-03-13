@@ -44,7 +44,8 @@ class Posts extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-        Gate::authorize('posts-edit', $post);
+
+        // Gate::authorize('posts-edit', $post);
         $tags = $post->tags()->pluck("title", "id");
         $cats = Category::pluck("title", "id");
         return view('posts.edit', compact('post', 'cats', 'tags'));

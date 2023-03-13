@@ -95,3 +95,4 @@ check if user matches Auth::user() in posts.show in comments section in comments
 
 when gates when policies; best case gates-policies
 
+add fnonality search in users, posts

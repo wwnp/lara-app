@@ -9,7 +9,6 @@
     </main> --}}
     <main>
         <div class="container">
-            <x-notification />
             @yield('content')
         </div>
     </main>

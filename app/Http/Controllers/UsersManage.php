@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Enums\Comment\Status as CommentStatus;
 use App\Http\Requests\Comments\Store as StoreRequest;
 use App\Enums\Comment\Types as CommentTypes;
+use App\Http\Requests\FirstMustBeAdminRequest;
 use App\Models\Role;
 use App\Models\User;
 
@@ -17,11 +18,10 @@ class UsersManage extends Controller
     {
         $roles = Role::pluck('role', 'id');
         // $roles = Role::orderBy('role')->get();
-        $users = User::whereDoesntHave('roles', function ($query) {
-            $query->where('role', '=', 'admin');
-        })
-            ->with('roles')
-            ->paginate(30);
+        // $users = User::whereDoesntHave('roles', function ($query) {
+        //     $query->where('role', '=', 'admin');
+        // })
+        $users = User::with('roles')->paginate(30);
 
         return view('users.index', compact('roles', 'users'));
     }
@@ -29,11 +29,21 @@ class UsersManage extends Controller
     public function manage(Request $request, string $id)
     {
         $data = $request->validate([
-            'roles' => 'required'
+            'roles' => 'required',
+            "user_id" => 'required',
         ]);
+
+        $userId = intval($data['user_id']);
+        $roles = $data['roles'];
+        // dd($roles);
+        // dd($userId === 1);
+        // dd($userId === 1 && !in_array(1, $roles));
+        if ($userId === 1 && !in_array(1, $roles)) {
+            return redirect()->back()->with('notification', 'users.first_user_admin_always');
+        }
         $user = User::findOrFail($id);
         $user->roles()->sync($data["roles"]);
-        redirect()->route('users.index')->with('notification', 'users.roles_updated');
+        return redirect()->route('users.index')->with('notification', 'users.roles_updated');
     }
 
     // public function edit($id)

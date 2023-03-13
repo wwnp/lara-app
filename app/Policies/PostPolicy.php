@@ -17,17 +17,18 @@ class PostPolicy
      * @return void
      */
 
-     
+
     public function update(User $user, Post $post)
     {
-        $role = $user->roles->first()->role;
-        switch ($role) {
-            case UserRole::ADMIN->value:
-                return true;
-            case UserRole::AUTHOR->value:
-                return $user->id === $post->user_id;
-            default:
-                return false;
-        }
+        return $user->id === $post->user_id;
+        // $role = $user->roles->first()->role;
+        // switch ($role) {
+        //     case UserRole::ADMIN->value:
+        //         return true;
+        //     case UserRole::AUTHOR->value:
+        //         return $user->id === $post->user_id;
+        //     default:
+        //         return false;
+        // }
     }
 }

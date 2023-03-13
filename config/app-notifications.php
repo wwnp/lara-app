@@ -32,5 +32,9 @@ return [
     'users.roles_updated' => [
         'type' => 'success',
         'text' => 'Roles updated successfully'
+    ],
+    'users.first_user_admin_always' => [
+        'type' => 'danger',
+        'text' => 'Primordial user must be an administrator'
     ]
 ];

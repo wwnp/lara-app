@@ -24,6 +24,7 @@
                         <div class="container-fluid">
                             @bind($user)
                             <x-form-select name="roles[]" placeholder="Выберите роль" label="Роли" :options="$roles" multiple many-relation></x-form-select>
+                            <x-form-input hidden name='user_id' :value="$user->id"></x-form-input>
                             <button class="btn btn-success mt-2">Send</button>
                             @endbind
                         </div>
