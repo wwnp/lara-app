@@ -25,17 +25,19 @@ class AuthServiceProvider extends ServiceProvider
 
         //gates
         Gate::define('posts-create', function ($user) {
-            return $user->roles()->whereIn('role', ['author'])->count() > 0;
+            return $user->roles()->where('role', ['author'])->count() > 0;
         });
         Gate::define('posts-edit', function (User $user, Post $post) {
-            dd($user);
             return
                 // $user->roles()->where('role', ['admin'])->count() > 0
                 // ||
                 $user->id === $post->user_id;
         });
         Gate::define('users-manage', function ($user) {
-            return $user->roles()->whereIn('role', ['admin'])->count() > 0;
+            return $user->roles()->where('role', ['admin'])->count() > 0;
+        });
+        Gate::define('comments-manage', function ($user) {
+            return $user->roles()->where('role', 'moderator')->count() > 0; // rf to Enum ALL
         });
     }
 }

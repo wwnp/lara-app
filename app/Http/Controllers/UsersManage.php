@@ -35,12 +35,11 @@ class UsersManage extends Controller
 
         $userId = intval($data['user_id']);
         $roles = $data['roles'];
-        // dd($roles);
-        // dd($userId === 1);
-        // dd($userId === 1 && !in_array(1, $roles));
         if ($userId === 1 && !in_array(1, $roles)) {
             return redirect()->back()->with('notification', 'users.first_user_admin_always');
-        }
+        } // rf to request 
+
+
         $user = User::findOrFail($id);
         $user->roles()->sync($data["roles"]);
         return redirect()->route('users.index')->with('notification', 'users.roles_updated');

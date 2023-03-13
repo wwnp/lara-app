@@ -1,5 +1,5 @@
 @extends('layouts.global')
-@extends('layouts.main')
+@extends('layouts.main-foredit')
 @section('content')
     <x-form method="put" action="{{ route('comments.update', [ $comment->id ]) }}">
         @bind($comment)

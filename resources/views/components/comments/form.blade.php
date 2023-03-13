@@ -11,16 +11,13 @@
     <x-form-input 
         name="nickname" 
         label="Nickname"
-        :disabled="Auth::check()"
+        {{-- :disabled="Auth::check()" --}}
         :value="Auth::user() ? Auth::user()->name : '' "
     ></x-form-input>
 
     <x-form-textarea name="body" label="Body"></x-form-textarea>
 
-    <x-recaptcha 
-        name="g-recaptcha-response"
-    >
-    </x-recaptcha>
+    <x-recaptcha name="g-recaptcha-response"></x-recaptcha>
 
     {{-- <div class="input-group mt-3">
         <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>

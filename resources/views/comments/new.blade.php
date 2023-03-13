@@ -1,5 +1,5 @@
 @extends('layouts.global')
-@extends('layouts.main')
+@extends('layouts.main-foredit')
 @section('content')
 @include('comments.table')
 @endsection

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Enums\Comment\Status as CommentStatus;
 use App\Http\Requests\Comments\Store as StoreRequest;
 use App\Enums\Comment\Types as CommentTypes;
+use Illuminate\Support\Facades\Auth;
 
 class Comments extends Controller
 {
@@ -62,7 +63,9 @@ class Comments extends Controller
 
     public function store(StoreRequest $request)
     {
+
         $data = $request->validated();
+        $user = Auth::user();
 
         $modelName = CommentTypes::fromName($request->safe()->for)->value;
 
@@ -73,8 +76,12 @@ class Comments extends Controller
                 ->back()
                 ->withErrors(['comments_limit' => 'Reached the maximum number of comments for this post.']);
         }
-
         $data = $request->safe()->only(['nickname', 'body']);
+        // dd(1);
+        if (isset($user) &&  $user->roles()->whereIn('role', ['admin', 'moderator'])->count() > 0) {
+            $data += ["status" => CommentStatus::APPROVED];
+        }
+
 
         $model = $modelName::findOrFail($request->safe()->id);
         $model->comments()->create($data);

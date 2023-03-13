@@ -16,10 +16,28 @@ class Posts extends Controller
 {
     public function index()
     {
+        $approvedCommentCount = function ($query) {
+            $query->where("status", CommentStatus::APPROVED->value);
+        };
         return view('posts.index', [
-            "posts" =>  Post::with("category")->withCount("comments")->orderBy("id", "DESC")->paginate(5)->onEachSide(2),
+            "posts" => Post::with("category")
+                ->withCount([
+                    "comments" => function ($query) {
+                        $query->where("status", CommentStatus::APPROVED->value);
+                    }
+                ])
+                ->orderBy("id", "DESC")
+                ->paginate(5)
+                ->onEachSide(2),
             "tags" => Tag::pluck("title", "id")
         ])->with('notification', 'profile.sent_verification_email');
+        // $approvedCommentCount = function ($query) {
+        //     $query->where("status", CommentStatus::APPROVED);
+        // };
+        // return view('posts.index', [
+        //     "posts" =>  Post::with("category")->withCount("comments",  $approvedCommentCount)->orderBy("id", "DESC")->paginate(5)->onEachSide(2),
+        //     "tags" => Tag::pluck("title", "id")
+        // ])->with('notification', 'profile.sent_verification_email');
     }
 
     public function create()
@@ -44,8 +62,7 @@ class Posts extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-
-        // Gate::authorize('posts-edit', $post);
+        Gate::authorize('posts-edit', $post);
         $tags = $post->tags()->pluck("title", "id");
         $cats = Category::pluck("title", "id");
         return view('posts.edit', compact('post', 'cats', 'tags'));
