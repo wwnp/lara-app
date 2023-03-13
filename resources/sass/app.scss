@@ -5,6 +5,7 @@
 @import 'variables';
 // @import 'spinner.scss';
 @import 'fonts.scss';
+@import 'custom-toast.scss';
 @import 'custom-grid.scss';
 @import 'custom-colors.scss';
 @import 'remove-notification.scss';
@@ -14,12 +15,14 @@
 
 @import "prismjs/themes/prism-okaidia.css";
 
+@import "toastify-js/src/toastify.css";
+
 html {
     font-family: 'IBMPlexSans';
 }
 
 body {
-    // box-sizing: border-box;
+    box-sizing: border-box;
     height: 100%;
 }
 main {

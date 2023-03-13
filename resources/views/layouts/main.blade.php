@@ -13,7 +13,6 @@
                     </ul>
                 </div>
                 <div class="col col-12 col-lg-10 p-0">
-                    <x-notification />
                     @yield('content')
                 </div>
             </div>

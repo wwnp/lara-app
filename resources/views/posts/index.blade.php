@@ -36,3 +36,13 @@
 </div>
 
 @endsection
+
+{{-- <script>
+    Toastify({
+        text: 'Your message goes here!',
+        duration: 3000, // duration in milliseconds
+        gravity: 'top', // toast position
+        position: 'right', // toast position
+        backgroundColor: 'linear-gradient(to right, #00b09b, #96c93d)', // toast background color
+    }).showToast();
+</script> --}}

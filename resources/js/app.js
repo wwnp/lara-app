@@ -6,6 +6,8 @@ import Prism from 'prismjs';
 
 import ClipboardJS from 'clipboard';
 
+// import './toastify.js';
+
 document.addEventListener('DOMContentLoaded', function () {
     Prism.highlightAll();
     console.log(Prism)
@@ -36,3 +38,5 @@ currentYearId.innerHTML = (new Date()).getFullYear();
 // window.addEventListener('load', function () {
 //     loading.style.display = 'none';
 // });
+
+

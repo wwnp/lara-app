@@ -21,15 +21,19 @@ class UsersManage extends Controller
             $query->where('role', '=', 'admin');
         })
             ->with('roles')
-            ->get();
+            ->paginate(30);
 
         return view('users.index', compact('roles', 'users'));
     }
 
     public function manage(Request $request, string $id)
     {
+        $data = $request->validate([
+            'roles' => 'required'
+        ]);
         $user = User::findOrFail($id);
-        dd($request);
+        $user->roles()->sync($data["roles"]);
+        redirect()->route('users.index')->with('notification', 'users.roles_updated');
     }
 
     // public function edit($id)

@@ -34,10 +34,6 @@
                             @endif
                         </div>
                     </div>
-                    
-                    <div  class="card-text pt-3">
-                        <x-notification />
-                      </div>
                 </div>
             </div>
         </div>

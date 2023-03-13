@@ -6,7 +6,7 @@
       <tr>
         <th scope="col">ID</th>
         <th scope="col">AUTHOR</th>
-        <th scope="col">Role</th>
+        <th scope="col">Roles</th>
       </tr>
     </thead>
     <tbody>
@@ -20,7 +20,6 @@
                     @endforeach
                 </td>
                 <td>
-                    
                     <x-form method="put" action="{{ route('users.manage', ['id' => $user->id]) }}">
                         <div class="container-fluid">
                             @bind($user)
@@ -29,10 +28,12 @@
                             @endbind
                         </div>
                     </x-form>
-                    
                 </td>
             </tr>
         @endforeach
     </tbody>
 </table>
+<div class="d-flex justify-content-center">
+    {{ $users->links() }}
+</div>
 @endsection

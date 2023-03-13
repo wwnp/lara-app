@@ -28,5 +28,9 @@ return [
     'profile.verify_success' => [
         'type' => 'info',
         'text' => 'Successfully verified'
+    ],
+    'users.roles_updated' => [
+        'type' => 'success',
+        'text' => 'Roles updated successfully'
     ]
 ];
