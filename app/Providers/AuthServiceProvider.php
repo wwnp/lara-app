@@ -48,5 +48,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('videos-manage', function ($user) {
             return $user->roles()->where('role', 'admin')->count() > 0;
         });
+        Gate::define('admin-panel-manage', function ($user) {
+            return $user->roles()->where('role', 'admin')->count() > 0;
+        });
     }
 }

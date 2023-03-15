@@ -18,9 +18,18 @@
             <div class="container-fluid">
                 <nav class="navbar navbar-dark bg-light ">
                     <div>
-                        <x-nav-header></x-nav-header>
-                        {{-- <h2>{{ Route::currentRouteName() }}</h2> --}}
-                        
+                        <a href="{{ route("posts.index") }}"><img src="{{ asset('assets/images/logo.png') }}" class="logo" alt="My Logo"></a>
+                        {{-- <x-nav-header></x-nav-header> --}}
+                        {{-- <a href="{{ route('posts.index')}}" class="btn btn-sm btn-dark">Главная</a> --}}
+                        @auth
+                            <a href="{{ route('profile.index')}}" class="btn  btn-warning">Личный кабинет</a>
+                            {{-- {{ Auth::user()->role }} --}}
+                        @else
+                            <a href="{{ route('login.create')}}" class="btn  btn-success">{{ trans('messages.login') }}</a>
+                            <a href="{{ route('signup.create')}}" class="btn btn-dark">{{ trans('messages.become-author') }}</a>
+                        @endif
+
+                        {{-- <h1>{{ trans('messages.welcome') }}</h1> --}}
                         {{-- <h5>{{ Auth::user() }}</h5> --}}
     
                         {{-- @foreach (Auth::user()->roles()->get() as $role)
@@ -32,15 +41,14 @@
                                 Please <a href="{{ route('verification.notice') }}">verify your email address</a>.
                             </div>
                         @endif
-    
-    
+                    </div>
+                    <div>
+                        <a href="{{ route('signup.create')}}" class="btn btn-dark">{{ trans('messages.become-author') }}</a>
                     </div>
                 </nav>
             </div>
         </header>
-
         @yield('main')
-    
         <footer class="footer text-center text-lg-start bg-dark-custom text-white">
             <div class="container p-4">
                 <div class="row">
@@ -125,8 +133,6 @@
             <div class="spinner"></div>
         </div>
     </div>
-
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    
 </body>
 </html>

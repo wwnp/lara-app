@@ -18,3 +18,7 @@
     <hr>
     <x-comments.list :comments="$video->comments" />
 @endsection
+
+// R9uJU2bLJgI
+
+

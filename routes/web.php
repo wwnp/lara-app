@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Address;
-
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -52,6 +52,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/tags', [Tags::class, 'index'])->name("tags.index");
         Route::get('/tags/create', [Tags::class, 'create'])->name("tags.create");
         Route::post('/tags', [Tags::class, 'store'])->name("tags.store");
+        Route::get('/tags/{id}', [Tags::class, 'show'])->name("tags.show");
         Route::get('/tags/{id}/edit', [Tags::class, 'edit'])->name("tags.edit");
         Route::put('/tags/{id}', [Tags::class, 'update'])->name("tags.update");
     });
@@ -60,16 +61,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/videos', [Videos::class, 'index'])->name("videos.index");
         Route::get('/videos/create', [Videos::class, 'create'])->name("videos.create");
         Route::post('/videos', [Videos::class, 'store'])->name("videos.store");
+        Route::get('/videos/{id}', [Videos::class, 'show'])->name("videos.show");
         Route::get('/videos/{id}/edit', [Videos::class, 'edit'])->name("videos.edit");
         Route::put('/videos/{id}', [Videos::class, 'update'])->name("videos.update");
     });
+
+    Route::middleware(['can:admin-panel-manage'])->group(function () {
+        Route::get('/admin-panel', [AdminController::class, 'index'])->name("admin.index");
+    });
+
+
 
     // Route::get('/address', [Address::class, 'form'])->name("address.form");
     // Route::post('/address', [Address::class, 'parse'])->name("address.parse");
 });
 Route::get('/posts', [Posts::class, 'index'])->name("posts.index");
 Route::get('/posts/{id}', [Posts::class, 'show'])->name("posts.show");
-Route::get('posts/slug/{slug}', [Posts::class, 'slug'])->name("posts.slug");
+Route::get('/category/{slug}', [Posts::class, 'slug'])->name("category.slug");
 Route::post('/comments', [Comments::class, 'store'])->name("comments.store");
 
 // AUTH ---------------------------------------------

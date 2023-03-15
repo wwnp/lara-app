@@ -197,6 +197,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         App\Providers\DaDataServiceProvider::class,
+        App\Providers\GlobalViewServiceProvider::class,
 
     ],
 
