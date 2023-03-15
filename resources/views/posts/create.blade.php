@@ -1,7 +1,7 @@
 @extends('layouts.global')
 @extends('layouts.main-foredit')
 @section('content')
-<h1>CREATE</h1>
+<h1>Создать пост</h1>
 <x-form method="post" action="{{ route('posts.store') }}">
     <div class="container-fluid">
         @include('posts.form-fields')

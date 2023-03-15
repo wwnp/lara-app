@@ -21,7 +21,7 @@
                         <x-nav-header></x-nav-header>
                         {{-- <h2>{{ Route::currentRouteName() }}</h2> --}}
                         
-                        <h5>{{ Auth::user() }}</h5>
+                        {{-- <h5>{{ Auth::user() }}</h5> --}}
     
                         {{-- @foreach (Auth::user()->roles()->get() as $role)
                             <h5>{{ $role->role }}</h5>

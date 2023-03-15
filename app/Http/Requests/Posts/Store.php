@@ -5,6 +5,7 @@ namespace App\Http\Requests\Posts;
 use App\Rules\BirthYearRule;
 use App\Rules\AllInModel;
 use App\Models\Tag;
+use App\Rules\RestrictedTags;
 use App\Rules\CleanHtml;
 use App\Rules\ContentTagsOnly;
 use Illuminate\Foundation\Http\FormRequest;
@@ -23,7 +24,13 @@ class Store extends FormRequest
         return [
             'title' => 'required|min:3|max:128',
             // 'content' => ['required'],
-            'content' => ['required'],
+            // 'content' => ['required'],
+            // 'content' => ['required', function ($attribute, $value, $fail) {
+            //     if (strpos($value, '<script') !== false) {
+            //         $fail('The :attribute field contains an invalid tag. 12312312');
+            //     }
+            // }],
+            'content' => ['required', new RestrictedTags],
             // 'content' => ['required', new ContentTagsOnly],
             'category_id' => 'required|numeric',
             'tags' => ['required', 'array', new AllInModel(Tag::class)],

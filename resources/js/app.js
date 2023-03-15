@@ -1,6 +1,7 @@
 // import './bootstrap';
 import '../sass/app.scss';
 import { removeNotification } from './remove-notication.js';
+import { tagbuttons } from './tagbuttons.js';
 
 import Prism from 'prismjs';
 
@@ -10,13 +11,11 @@ import ClipboardJS from 'clipboard';
 
 document.addEventListener('DOMContentLoaded', function () {
     Prism.highlightAll();
-    console.log(Prism)
 });
 
 // const clipboard = new ClipboardJS('.copy-btn');
 
 document.addEventListener('DOMContentLoaded', function () {
-    console.log(123)
     new ClipboardJS('.copy-btn', {
         text: function (trigger) {
             return trigger.previousElementSibling.textContent;
@@ -39,4 +38,5 @@ currentYearId.innerHTML = (new Date()).getFullYear();
 //     loading.style.display = 'none';
 // });
 
+tagbuttons()
 

@@ -28,13 +28,6 @@ class Posts extends Controller
                 ->onEachSide(2),
             "tags" => Tag::pluck("title", "id")
         ])->with('notification', 'profile.sent_verification_email');
-        // $approvedCommentCount = function ($query) {
-        //     $query->where("status", CommentStatus::APPROVED);
-        // };
-        // return view('posts.index', [
-        //     "posts" =>  Post::with("category")->withCount("comments",  $approvedCommentCount)->orderBy("id", "DESC")->paginate(5)->onEachSide(2),
-        //     "tags" => Tag::pluck("title", "id")
-        // ])->with('notification', 'profile.sent_verification_email');
     }
 
     public function create()

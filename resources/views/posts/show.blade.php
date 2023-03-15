@@ -10,7 +10,8 @@
                     <h1 class="text-center">{{ $post->title }}</h1>
                     <p class="text-muted text-center">Written by {{$post->user->name}} on {{$post->created_at}}</p>
                         @can('update', $post)
-                            <h1 class="text-secondary">МОГУ РЕДАКТИРОВАТЬ</h1>
+                            <a class="btn btn-sm btn-warning" href="{{ route('posts.edit', ['id' => $post->id]) }}">Редактировать</a>
+                            {{-- <h1 class="text-secondary">МОГУ РЕДАКТИРОВАТЬ</h1> --}}
                         @endcan
                   </header>
                   <section>
@@ -71,3 +72,4 @@
     });
 </script> --}}
 @endsection
+
